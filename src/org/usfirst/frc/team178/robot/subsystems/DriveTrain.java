@@ -10,17 +10,40 @@ import org.usfirst.frc.team178.robot.RobotMap;
  */
 public class DriveTrain extends Subsystem {
 	
-	Victor left1 = RobotMap.left1;
-	Victor left2;
-	Victor right1;
-	Victor right2;
-    
-    // Put methods for controlling this subsystem
+	Victor left = new Victor(0);
+	Victor right = new Victor(3);
+	
+	
+	
+			// Put methods for controlling this subsystem
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+    }
+    
+    public void forward() {
+    	left.set(1);
+    	right.set(-1);
+    }
+    
+    public void backward() {
+    	left.set(-1);
+    	right.set(1);
+    	}
+    
+    public void stop() {
+    	left.set(0);
+    	right.set(0);
+    }
+    
+    public void turnLeft() {
+    	left.set(0);
+    	right.set(1);
+    }
+    
+    public void turnRight() {
+    	left.set(1);
+    	right.set(0);
     }
 }
 
