@@ -10,8 +10,15 @@ import org.usfirst.frc.team178.robot.RobotMap;
  */
 public class DriveTrain extends Subsystem {
 	
-	Victor left = new Victor(0);
-	Victor right = new Victor(3);
+	Victor left;
+	Victor right;
+	
+	public DriveTrain(int v1, int v2)  {
+		
+		left = new Victor(v1);
+		right = new Victor(v2);
+		
+	}
 	
 	
 	
@@ -45,5 +52,6 @@ public class DriveTrain extends Subsystem {
     	left.set(1);
     	right.set(0);
     }
-}
+    
+ }
 

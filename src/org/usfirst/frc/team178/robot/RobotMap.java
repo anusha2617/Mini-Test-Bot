@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Victor;
  */
 public class RobotMap {
 	
-	public Victor left1 = new Victor(0);
+	public static int left1 = 0;
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
     // public static int leftMotor = 1;
