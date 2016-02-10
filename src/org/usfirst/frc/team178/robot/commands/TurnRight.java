@@ -27,7 +27,7 @@ public class TurnRight extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	double passedTime = timeSinceInitialized();
-    	if (passedTime == 10)  {
+    	if (passedTime >= 2)  {
     		return true;
     	}
     	else {

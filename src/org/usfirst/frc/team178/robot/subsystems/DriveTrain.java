@@ -49,7 +49,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void turnRight() {
-    	left.set(1);
+    	left.set(-1);
     	right.set(0);
     }
     
