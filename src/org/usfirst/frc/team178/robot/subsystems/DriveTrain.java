@@ -12,12 +12,13 @@ public class DriveTrain extends Subsystem {
 	
 	Victor left;
 	Victor right;
+	DigitalInput Bumper;
 	
 	public DriveTrain(int v1, int v2)  {
 		
 		left = new Victor(v1);
 		right = new Victor(v2);
-		
+		Bumper = new DigitalInput(0);
 	}
 	
 	
@@ -53,5 +54,10 @@ public class DriveTrain extends Subsystem {
     	right.set(0);
     }
     
+    public boolean getBumperValue() {
+    	return Bumper.get(); 
+    }
+  
+   
  }
 
