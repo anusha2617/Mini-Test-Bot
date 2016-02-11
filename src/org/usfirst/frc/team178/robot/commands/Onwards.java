@@ -1,6 +1,8 @@
 package org.usfirst.frc.team178.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team178.robot.Robot;
 
 /**
@@ -23,6 +25,7 @@ public class Onwards extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.drivetrain.forward();
+    	SmartDashboard.putNumber("DISTANCE", Robot.drivetrain.getDistance() );
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,11 +39,14 @@ public class Onwards extends Command {
     	}*/
     	
     	if (Robot.drivetrain.getBumperValue() ) {
-    		return true;
-    	}
-    	else {
     		return false;
     	}
+    	else {
+    		return true;
+    	}
+    	
+    	
+    	
     }
 
     // Called once after isFinished returns true

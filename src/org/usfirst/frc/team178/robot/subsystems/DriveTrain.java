@@ -13,12 +13,14 @@ public class DriveTrain extends Subsystem {
 	Victor left;
 	Victor right;
 	DigitalInput Bumper;
+	Ultrasonic Sensor;
 	
 	public DriveTrain(int v1, int v2)  {
 		
-		left = new Victor(v1);
-		right = new Victor(v2);
+		left = new Victor(1);
+		right = new Victor(3);
 		Bumper = new DigitalInput(0);
+		Sensor = new Ultrasonic(v1,v2);
 	}
 	
 	
@@ -57,7 +59,10 @@ public class DriveTrain extends Subsystem {
     public boolean getBumperValue() {
     	return Bumper.get(); 
     }
-  
+    
+    public double getDistance() {
+    	return Sensor.pidGet();
+    }
    
  }
 

@@ -26,12 +26,19 @@ public class TurnLeft extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double passedTime = timeSinceInitialized();
+    	/* double passedTime = timeSinceInitialized();
     	if (passedTime >= 2) {
     		return true;
     }
     	else{ 
     		return false;
+    	} */
+    	
+    	if (Robot.drivetrain.getBumperValue() ) {
+    		return false;
+    	}
+    	else {
+    		return true;
     	}
     }
 
