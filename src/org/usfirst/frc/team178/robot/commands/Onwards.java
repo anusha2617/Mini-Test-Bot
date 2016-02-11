@@ -36,10 +36,10 @@ public class Onwards extends Command {
     	}*/
     	
     	if (Robot.drivetrain.getBumperValue() ) {
-    		return true;
+    		return false;
     	}
     	else {
-    		return false;
+    		return true;
     	}
     }
 
