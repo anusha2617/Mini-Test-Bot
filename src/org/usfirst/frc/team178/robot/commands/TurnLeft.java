@@ -1,7 +1,7 @@
 package org.usfirst.frc.team178.robot.commands;
 
 import org.usfirst.frc.team178.robot.Robot;
-import org.usfirst.frc.team178.robot.subsystems.Sensors;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -26,19 +26,12 @@ public class TurnLeft extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	/* double passedTime = timeSinceInitialized();
+    	double passedTime = timeSinceInitialized();
     	if (passedTime >= 2) {
     		return true;
     }
     	else{ 
     		return false;
-    	} */
-    	
-    	if (Robot.sensors.getBumperValue() ) {
-    		return false;
-    	}
-    	else {
-    		return true;
     	}
     }
 
