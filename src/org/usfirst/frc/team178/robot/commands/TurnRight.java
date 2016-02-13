@@ -1,7 +1,7 @@
 package org.usfirst.frc.team178.robot.commands;
 
 import org.usfirst.frc.team178.robot.Robot;
-
+import org.usfirst.frc.team178.robot.subsystems.Sensors;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -34,7 +34,7 @@ public class TurnRight extends Command {
     		return false;
     	} */
     	
-    	if (Robot.drivetrain.getBumperValue() ) {
+    	if (Robot.sensors.getBumperValue() ) {
     		return false;
     	}
     	else {
