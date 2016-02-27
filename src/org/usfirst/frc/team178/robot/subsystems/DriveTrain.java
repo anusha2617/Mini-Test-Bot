@@ -14,13 +14,19 @@ public class DriveTrain extends Subsystem {
 	Victor right;
 	DigitalInput Bumper;
 	Ultrasonic Sensor;
+	Encoder EncL;
+	Encoder EncR;
+	Joystick TriggerHappy;
 	
 	public DriveTrain(int v1, int v2)  {
 		
 		left = new Victor(1);
 		right = new Victor(3);
 		Bumper = new DigitalInput(0);
-		Sensor = new Ultrasonic(v1,v2);
+		Sensor = new Ultrasonic(9,9);
+		EncL = new Encoder(0,1);
+		EncR = new Encoder(2,3);
+		TriggerHappy = new Joystick(3);
 	}
 	
 	
@@ -46,14 +52,19 @@ public class DriveTrain extends Subsystem {
     	right.set(0);
     }
     
-    public void turnLeft() {
+    public void spinLeft(double magn) {
     	left.set(0);
-    	right.set(1);
+    	right.set(magn);
     }
     
-    public void turnRight() {
-    	left.set(-1);
+    public void spinRight(double magn) {
+    	left.set(-magn);
     	right.set(0);
+    }
+    
+    public void manualControl(double L, double R){
+    	left.set(-L);
+    	right.set(R);
     }
     
     public boolean getBumperValue() {
@@ -63,6 +74,16 @@ public class DriveTrain extends Subsystem {
     public double getDistance() {
     	return Sensor.pidGet();
     }
+    
+    public double getRotations() {
+    	return (EncR.getRaw()+EncL.getRaw())/2;
+    }
+    
+    public boolean getTurn() {
+    	return TriggerHappy.getRawButton(2);
    
- }
+    }
+ 
+
+}
 

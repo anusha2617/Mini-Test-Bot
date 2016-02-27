@@ -11,6 +11,10 @@ import edu.wpi.first.wpilibj.Victor;
 public class RobotMap {
 	
 	public static int left1 = 0;
+	public static int JoystickONE = 0;
+	
+	public static int encoderChannelIN = 1;
+	public static int encoderChannelOUT = 1;
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
     // public static int leftMotor = 1;
@@ -20,4 +24,5 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
+	
 }

@@ -16,8 +16,10 @@ public class Onwards extends Command {
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
     	
+    	
+    	
     }
-
+    
     // Called just before this Command runs the first time
     protected void initialize() {
     }
@@ -26,6 +28,7 @@ public class Onwards extends Command {
     protected void execute() {
     	Robot.drivetrain.forward();
     	SmartDashboard.putNumber("DISTANCE", Robot.drivetrain.getDistance() );
+    	SmartDashboard.putNumber("Rotations", Robot.drivetrain.getRotations());
     }
 
     // Make this return true when this Command no longer needs to run execute()
