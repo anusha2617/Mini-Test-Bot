@@ -1,7 +1,7 @@
 package org.usfirst.frc.team178.robot;
 
 //import org.usfirst.frc.team178.robot.commands.CloseClaw;
-import org.usfirst.frc.team178.robot.commands.Onwards;
+import org.usfirst.frc.team178.robot.commands.*;
 //import org.usfirst.frc.team178.robot.commands.Pickup;
 //import org.usfirst.frc.team178.robot.commands.Place;
 //import org.usfirst.frc.team178.robot.commands.PrepareToPickup;
@@ -17,9 +17,7 @@ public class Autonomous extends CommandGroup {
 
 	public Autonomous() {
     	addSequential(new Onwards());
-        addSequential(new TurnLeft());
-        addSequential(new Onwards());
-        addSequential(new TurnRight());
-
+        addSequential(new Reverse());
+        //addParallel(new enc());
     }
 }

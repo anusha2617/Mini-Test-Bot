@@ -1,18 +1,22 @@
 package org.usfirst.frc.team178.robot.commands;
 
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team178.robot.Robot;
 
 /**
  *
  */
-public class Onwards extends Command {
-	
+public class enc extends Command {
 
-    public Onwards() {
+	Encoder right;
+	Encoder left;
+    public enc() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	right = new Encoder(1, 2, false, EncodingType.k2X);
+    	left = new Encoder(3,4, false, EncodingType.k2X);
+    	
     	
     }
 
@@ -22,23 +26,17 @@ public class Onwards extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.forward(0.5);
+    	System.out.println("RIGHT " + right.getDistance());
+    	System.out.println("LEFT  " + left.getDistance());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double passedTime = timeSinceInitialized();
-    	if (passedTime == 10) {
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.stop();
     }
 
     // Called when another command which requires one or more of the same

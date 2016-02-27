@@ -1,7 +1,9 @@
 
 package org.usfirst.frc.team178.robot;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -75,7 +77,9 @@ public class Robot extends IterativeRobot {
 		} */
     	
     	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        if (autonomousVroom != null){// autonomousCommand.start();  
+        	autonomousVroom.start();
+        }
     }
 
     /**
@@ -83,7 +87,8 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        autonomousVroom.start();
+        System.out.println("Right" + (new Encoder(1, 2, false, EncodingType.k2X)).getDistance());
+        System.out.println("Left" + (new Encoder(3, 4, false, EncodingType.k2X)).getDistance());
     }
 
     public void teleopInit() {
@@ -105,6 +110,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
+    	
         LiveWindow.run();
     }
 }

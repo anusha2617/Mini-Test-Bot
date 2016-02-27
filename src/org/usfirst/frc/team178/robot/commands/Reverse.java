@@ -6,10 +6,10 @@ import org.usfirst.frc.team178.robot.Robot;
 /**
  *
  */
-public class Onwards extends Command {
+public class Reverse extends Command {
 	
 
-    public Onwards() {
+    public Reverse() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
@@ -22,7 +22,7 @@ public class Onwards extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.forward(0.5);
+    	Robot.drivetrain.forward(-0.5);
     }
 
     // Make this return true when this Command no longer needs to run execute()

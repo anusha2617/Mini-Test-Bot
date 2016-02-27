@@ -12,6 +12,9 @@ public class DriveTrain extends Subsystem {
 	
 	Victor left;
 	Victor right;
+	double Sideways;
+	double UpandDown; 
+	
 	
 	public DriveTrain(int v1, int v2)  {
 		
@@ -28,9 +31,9 @@ public class DriveTrain extends Subsystem {
     public void initDefaultCommand() {
     }
     
-    public void forward() {
-    	left.set(1);
-    	right.set(-1);
+    public void forward(double multiplier) {
+    	left.set(multiplier);
+    	right.set(-multiplier);
     }
     
     public void backward() {
@@ -43,14 +46,14 @@ public class DriveTrain extends Subsystem {
     	right.set(0);
     }
     
-    public void turnLeft() {
+    public void turnLeft(double multiplier) {
     	left.set(0);
-    	right.set(1);
+    	right.set(multiplier);
     }
     
-    public void turnRight() {
+    public void turnRight(double multiplier) {
     	left.set(1);
-    	right.set(0);
+    	right.set(multiplier);
     }
     
  }
