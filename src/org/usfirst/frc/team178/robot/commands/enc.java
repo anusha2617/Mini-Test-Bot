@@ -1,18 +1,23 @@
 package org.usfirst.frc.team178.robot.commands;
 
-import org.usfirst.frc.team178.robot.Robot;
-
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TurnLeft extends Command {
+public class enc extends Command {
 
-    public TurnLeft() {
+	Encoder right;
+	Encoder left;
+    public enc() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	right = new Encoder(1, 2, false, EncodingType.k2X);
+    	left = new Encoder(3,4, false, EncodingType.k2X);
+    	
+    	
     }
 
     // Called just before this Command runs the first time
@@ -21,23 +26,17 @@ public class TurnLeft extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.turnLeft(0.5);
+    	System.out.println("RIGHT " + right.getDistance());
+    	System.out.println("LEFT  " + left.getDistance());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double passedTime = timeSinceInitialized();
-    	if (passedTime >= 2) {
-    		return true;
-    }
-    	else{ 
-    		return false;
-    	}
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.stop();
     }
 
     // Called when another command which requires one or more of the same
