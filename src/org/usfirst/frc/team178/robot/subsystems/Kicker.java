@@ -59,7 +59,7 @@ public class Kicker extends Subsystem {
     }
     
     public void timerShutOff(){
-    	t.stop();jjfjkejrj
+    	t.stop();//jjfjkejrj //Not sure if this was on purpose... 
     	
     	
     	

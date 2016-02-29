@@ -24,13 +24,13 @@ public class Onwards extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-<<<<<<< HEAD
-    	Robot.drivetrain.forward();
+
+/*    	Robot.drivetrain.forward();
     	SmartDashboard.putNumber("DISTANCE", Robot.drivetrain.getDistance() );
-    	SmartDashboard.putNumber("Rotations", Robot.drivetrain.getRotations());
-=======
-    	Robot.drivetrain.forward(0.5);
->>>>>>> 9514500474a10caeb81d5a6056b8f03119db34ba
+    	SmartDashboard.putNumber("Rotations", Robot.drivetrain.getRotations());*/
+
+//    	Robot.drivetrain.forward(0.5);
+
     }
 
     // Make this return true when this Command no longer needs to run execute()

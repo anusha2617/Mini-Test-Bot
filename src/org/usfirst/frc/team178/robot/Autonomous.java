@@ -18,14 +18,14 @@ public class Autonomous extends CommandGroup {
 	public Autonomous() {
 		
     	addSequential(new Onwards());
-<<<<<<< HEAD
+
        /* addSequential(new TurnLeft());
         addSequential(new Onwards());
         addSequential(new TurnRight());*/
 
-=======
+
         addSequential(new Reverse());
         //addParallel(new enc());
->>>>>>> 9514500474a10caeb81d5a6056b8f03119db34ba
+
     }
 }
