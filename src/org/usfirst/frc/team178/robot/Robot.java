@@ -1,12 +1,26 @@
 
 package org.usfirst.frc.team178.robot;
 
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 //import org.usfirst.frc.team178.robot.commands.ExampleCommand;
 import org.usfirst.frc.team178.robot.subsystems.DriveTrain;
+=======
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
+//import org.usfirst.frc.team178.robot.commands.ExampleCommand;
+import org.usfirst.frc.team178.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team178.robot.subsystems.Kicker;
+
+>>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -20,6 +34,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	Autonomous autonomousVroom;
 	public static final DriveTrain drivetrain = new DriveTrain(0,3);
+<<<<<<< HEAD
+=======
+	public static final Kicker kicker = new Kicker();
+	
+>>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
 	public static OI oi;
 
     Command autonomousCommand;
@@ -75,7 +94,13 @@ public class Robot extends IterativeRobot {
 		} */
     	
     	// schedule the autonomous command (example)
+<<<<<<< HEAD
         if (autonomousCommand != null) autonomousCommand.start();
+=======
+        if (autonomousVroom != null){// autonomousCommand.start();  
+        	autonomousVroom.start();
+        }
+>>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
     }
 
     /**
@@ -83,7 +108,12 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+<<<<<<< HEAD
         autonomousVroom.start();
+=======
+        System.out.println("Right" + (new Encoder(1, 2, false, EncodingType.k2X)).getDistance());
+        System.out.println("Left" + (new Encoder(3, 4, false, EncodingType.k2X)).getDistance());
+>>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
     }
 
     public void teleopInit() {
@@ -99,12 +129,21 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+<<<<<<< HEAD
+=======
+        
+        
+>>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
     }
     
     /**
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
+<<<<<<< HEAD
+=======
+    	
+>>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
         LiveWindow.run();
     }
 }

@@ -1,18 +1,19 @@
 package org.usfirst.frc.team178.robot.commands;
 
-import org.usfirst.frc.team178.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team178.robot.Robot;
 
 /**
  *
  */
-public class TurnRight extends Command {
+public class Reverse extends Command {
+	
 
-    public TurnRight() {
+    public Reverse() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
+    	
     }
 
     // Called just before this Command runs the first time
@@ -21,21 +22,13 @@ public class TurnRight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-<<<<<<< HEAD
-    	Robot.drivetrain.turnRight();
-=======
-    	Robot.drivetrain.turnRight(0.5);
->>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
+    	Robot.drivetrain.forward(-0.5);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	double passedTime = timeSinceInitialized();
-<<<<<<< HEAD
-    	if (passedTime >= 1)  {
-=======
-    	if (passedTime >= 2)  {
->>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
+    	if (passedTime == 10) {
     		return true;
     	}
     	else {

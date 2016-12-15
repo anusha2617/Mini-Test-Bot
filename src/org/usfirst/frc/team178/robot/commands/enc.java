@@ -1,18 +1,23 @@
 package org.usfirst.frc.team178.robot.commands;
 
-import org.usfirst.frc.team178.robot.Robot;
-
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TurnRight extends Command {
+public class enc extends Command {
 
-    public TurnRight() {
+	Encoder right;
+	Encoder left;
+    public enc() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	right = new Encoder(1, 2, false, EncodingType.k2X);
+    	left = new Encoder(3,4, false, EncodingType.k2X);
+    	
+    	
     }
 
     // Called just before this Command runs the first time
@@ -21,31 +26,17 @@ public class TurnRight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-<<<<<<< HEAD
-    	Robot.drivetrain.turnRight();
-=======
-    	Robot.drivetrain.turnRight(0.5);
->>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
+    	System.out.println("RIGHT " + right.getDistance());
+    	System.out.println("LEFT  " + left.getDistance());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double passedTime = timeSinceInitialized();
-<<<<<<< HEAD
-    	if (passedTime >= 1)  {
-=======
-    	if (passedTime >= 2)  {
->>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.stop();
     }
 
     // Called when another command which requires one or more of the same

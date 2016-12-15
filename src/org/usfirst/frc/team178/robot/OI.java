@@ -1,6 +1,15 @@
 package org.usfirst.frc.team178.robot;
 
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj.buttons.Button;
+=======
+import org.usfirst.frc.team178.robot.commands.Onwards;
+//import org.usfirst.frc.team178.robot.subsystems.JoystickControl;
+
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.Joystick;
+>>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
 //import org.usfirst.frc.team178.robot.commands.ExampleCommand;
 
 /**
@@ -8,10 +17,16 @@ import edu.wpi.first.wpilibj.buttons.Button;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+<<<<<<< HEAD
+=======
+	
+	
+>>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
     // number it is.
+<<<<<<< HEAD
     // Joystick stick = new Joystick(port);
     // Button button = new JoystickButton(stick, buttonNumber);
     
@@ -19,6 +34,42 @@ public class OI {
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.
     
+=======
+	
+    Joystick stick = new Joystick(RobotMap.JoystickONE);
+    // Button button = new JoystickButton(stick, buttonNumber);
+    Button B1 = new JoystickButton(stick, 1);
+    Button B2 = new JoystickButton(stick, 2);
+    Button B3 = new JoystickButton(stick, 3);
+    Button B4 = new JoystickButton(stick, 4);
+    Button B5 = new JoystickButton(stick, 5);
+    Button B6 = new JoystickButton(stick, 6);
+    Button B7 = new JoystickButton(stick, 7);
+    Button B8 = new JoystickButton(stick, 8);
+	
+	
+    // There are a few additional built in buttons you can use. Additionally,
+    // by subclassing Button you can create custom triggers and bind those to
+    // commands the same as any other Button.
+    public OI(){
+    	//B1.whenPressed(new Onwards()); // multicommands can be put in a command extending command groups 
+    	                               // to run mutliple commands from a single button press
+    }
+    public double getXValue(){
+    	return stick.getX();
+    
+    }
+    public double getYValue(){
+    	return stick.getY();
+    
+    }
+    public double getZValue(){
+    	return stick.getTwist();
+    
+    }
+	
+	
+>>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
     //// TRIGGERING COMMANDS WITH BUTTONS
     // Once you have a button, it's trivial to bind it to a button in one of
     // three ways:

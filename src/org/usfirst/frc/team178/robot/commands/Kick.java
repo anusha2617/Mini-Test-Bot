@@ -2,50 +2,58 @@ package org.usfirst.frc.team178.robot.commands;
 
 import org.usfirst.frc.team178.robot.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TurnRight extends Command {
+public class Kick extends Command {
 
-    public TurnRight() {
+	boolean isTimer;
+	
+	
+    public Kick() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+        requires(Robot.kicker);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-<<<<<<< HEAD
-    	Robot.drivetrain.turnRight();
-=======
-    	Robot.drivetrain.turnRight(0.5);
->>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
+    	isTimer =  DriverStation.getInstance().getBatteryVoltage() < 8;
+    	Robot.kicker.runKicker();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double passedTime = timeSinceInitialized();
-<<<<<<< HEAD
-    	if (passedTime >= 1)  {
-=======
-    	if (passedTime >= 2)  {
->>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
-    		return true;
+    	if(isTimer){
+    		if(Robot.kicker.endTime()<2.7){
+    			return false;
+    		}
+    		else{
+    			return true;
+    		}
+    		
+    	}else{
+    		if(Robot.kicker.endPosition() < 3.4){
+    			return false;
+    		}
+    		else{
+    			return true;
+    		}
     	}
-    	else {
-    		return false;
-    	}
+        
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.stop();
+    	Robot.kicker.timerShutOff();
+    	
     }
 
     // Called when another command which requires one or more of the same

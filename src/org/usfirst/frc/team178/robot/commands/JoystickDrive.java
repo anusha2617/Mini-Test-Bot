@@ -7,12 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TurnRight extends Command {
+public class JoystickDrive extends Command {
 
-    public TurnRight() {
+    public JoystickDrive() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+        requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
@@ -21,31 +20,35 @@ public class TurnRight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-<<<<<<< HEAD
-    	Robot.drivetrain.turnRight();
-=======
-    	Robot.drivetrain.turnRight(0.5);
->>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
+    	double X = Robot.oi.getXValue();
+    	double Y = Robot.oi.getYValue();
+    	if(Y>0.05){
+	    	if(X<-0.05)
+	    		Robot.drivetrain.manualControl(Y,Y+X);
+	    	else if(X>0.05)
+	    		Robot.drivetrain.manualControl(Y+X, Y);
+	    	else
+	    		Robot.drivetrain.manualControl(Y,Y);
+    	}
+    	else if(Y<-0.05){
+	    	if(X<-0.05)
+	    		Robot.drivetrain.manualControl(Y,Y-X);
+	    	else if(X>0.05)
+	    		Robot.drivetrain.manualControl(Y-X, Y);
+	    	else
+	    		Robot.drivetrain.manualControl(Y,Y);
+    	}
+    	else
+    		Robot.drivetrain.stop();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double passedTime = timeSinceInitialized();
-<<<<<<< HEAD
-    	if (passedTime >= 1)  {
-=======
-    	if (passedTime >= 2)  {
->>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.stop();
     }
 
     // Called when another command which requires one or more of the same
