@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
@@ -6,12 +5,4 @@
 	<classpathentry kind="lib" path="build/jars/NetworkTables.jar"/>
 	<classpathentry kind="lib" path="build/jars/WPILib.jar"/>
 	<classpathentry kind="output" path="bin"/>
-=======
-<classpath>
-  <classpathentry kind="src" path="src"/>
-  <classpathentry kind="var" path="wpilib" sourcepath="wpilib.sources"/>
-  <classpathentry kind="var" path="networktables" sourcepath="networktables.sources"/>
-  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-  <classpathentry kind="output" path="bin"/>
->>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
 </classpath>

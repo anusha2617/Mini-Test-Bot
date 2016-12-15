@@ -30,10 +30,7 @@ public class Sensors extends Subsystem {
     	return Bumper.get(); 
     }
     
-<<<<<<< HEAD
     
-=======
->>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
     public double getDistance() {
     	return Sensor.pidGet();
     }

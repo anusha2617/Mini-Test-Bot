@@ -21,11 +21,7 @@ public class TurnLeft extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-<<<<<<< HEAD
     	Robot.drivetrain.turnLeft();
-=======
-    	Robot.drivetrain.turnLeft(0.5);
->>>>>>> 3fe2544e395fdba9f413f3fa0279624aff3f58f9
     }
 
     // Make this return true when this Command no longer needs to run execute()
