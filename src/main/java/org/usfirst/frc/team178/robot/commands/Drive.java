@@ -16,6 +16,11 @@ import org.usfirst.frc.team178.robot.subsystems.*;
 public class Drive extends Command {
 
     private DriveTrain driveTrain;
+    private OI oi;
+
+    private double xVal;
+    private double yVal;
+    private double twistVal;
 
   public Drive() {
       // Use requires() here to declare subsystem dependencies
@@ -24,12 +29,25 @@ public class Drive extends Command {
 
   // Called just before this Command runs the first time
   protected void initialize() {
-    
+      driveTrain = Robot.drivetrain;
+      oi = Robot.oi;
+
+      xVal = 0;
+      yVal = 0;
+      twistVal = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
-      
+      xVal = oi.getX();
+      yVal = oi.getY();
+      twistVal = oi.getTwist();
+
+    if(Math.abs(yVal) > 0.1 || Math.abs(twistVal) > 0.1){
+        driveTrain.drive(twistVal-yVal, twistVal+yVal);
+    } else {
+        driveTrain.drive(0, 0);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -39,10 +57,12 @@ public class Drive extends Command {
 
   // Called once after isFinished returns true
   protected void end() {
+      driveTrain.drive(0, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   protected void interrupted() {
+    driveTrain.drive(0, 0);
   }
 }

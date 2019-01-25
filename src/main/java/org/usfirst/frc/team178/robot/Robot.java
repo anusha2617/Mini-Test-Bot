@@ -24,7 +24,7 @@ import org.usfirst.frc.team178.robot.subsystems.*;
  */
 public class Robot extends /*IterativeRobot*/ TimedRobot {
 	//Autonomous autonomousVroom;
-	public static final DriveTrain drivetrain = new DriveTrain(0,3);
+	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.left, RobotMap.right);
 	public static OI oi;
 
     Command autonomousCommand;

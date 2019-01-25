@@ -35,7 +35,19 @@ public class OI {
 	public Button lBumper = new JoystickButton(xbox, 5);
 	public Button rBumper = new JoystickButton(xbox, 6);
 	public Button backButton = new JoystickButton(xbox, 7);
-	public Button startButton = new JoystickButton(xbox, 8);
+    public Button startButton = new JoystickButton(xbox, 8);
+    
+    public double getX () {
+		return joystickMain.getX();
+	}
+	
+	public double getY () {
+		return joystickMain.getY();
+	}
+	
+	public double getTwist () {
+		return joystickMain.getRawAxis(3);
+	}
     
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to

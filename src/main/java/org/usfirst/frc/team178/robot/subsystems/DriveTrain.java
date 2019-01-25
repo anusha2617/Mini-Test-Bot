@@ -8,6 +8,7 @@
 package org.usfirst.frc.team178.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team178.robot.commands.*;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.DigitalInput;
 
@@ -21,7 +22,6 @@ public class DriveTrain extends Subsystem {
 	DigitalInput Bumper;
 	
 	public DriveTrain(int v1, int v2)  {
-		
 		left = new Victor(v1);
 		right = new Victor(v2);
 		Bumper = new DigitalInput(0);
@@ -33,12 +33,14 @@ public class DriveTrain extends Subsystem {
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
+		setDefaultCommand(new Drive());
     }
     
-    public void drive(int leftnum, int rightnum){
+    public void drive(double leftnum, double rightnum){
     	left.set(leftnum);
     	right.set(rightnum);
-    }
+	}
+	
     public void forward() {
     	left.set(1);
     	right.set(-1);
