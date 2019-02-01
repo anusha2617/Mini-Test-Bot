@@ -41,7 +41,7 @@ public class Drive extends Command {
   protected void execute() {
       xVal = oi.getX();
       yVal = oi.getY();
-      twistVal = oi.getTwist();
+      twistVal = -oi.getTwist();
 
     if(Math.abs(yVal) > 0.1 || Math.abs(twistVal) > 0.1){
         driveTrain.drive(twistVal-yVal, twistVal+yVal);
