@@ -1,68 +1,110 @@
 /*----------------------------------------------------------------------------*/
+
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
+
 /* must be accompanied by the FIRST BSD license file in the root directory of */
+
 /* the project.                                                               */
+
 /*----------------------------------------------------------------------------*/
+
+
 
 package org.usfirst.frc.team178.robot.commands;
 
+
+
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team178.robot.*;
-import org.usfirst.frc.team178.robot.subsystems.*;
+
+import org.usfirst.frc.team178.robot.OI;
+
+import org.usfirst.frc.team178.robot.Robot;
+
+import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
+
+import org.usfirst.frc.team178.robot.subsystems.Arduino;
 
 
 
-public class Drive extends Command {
+public class SendMessage extends Command {
 
-    private DriveTrain driveTrain;
-    private OI oi;
+  
 
-    private double xVal;
-    private double yVal;
-    private double twistVal;
+  OI oi;
 
-  public Drive() {
-      // Use requires() here to declare subsystem dependencies
-      requires(Robot.drivetrain);
+  Arduino arduino;
+
+
+
+  public SendMessage() {
+
+
+
   }
+
+  
+
+
 
   // Called just before this Command runs the first time
-  protected void initialize() {
-      driveTrain = Robot.drivetrain;
-      oi = Robot.oi;
 
-      xVal = 0;
-      yVal = 0;
-      twistVal = 0;
+  @Override
+
+  protected void initialize() {
+
+    oi = Robot.oi;
+
+    arduino = Robot.arduino;
+
   }
+
+
 
   // Called repeatedly when this Command is scheduled to run
-  protected void execute() {
-      xVal = oi.getX();
-      yVal = oi.getY();
-      twistVal = -oi.getTwist();
 
-    if(Math.abs(yVal) > 0.1 || Math.abs(twistVal) > 0.1){
-        driveTrain.drive(twistVal-yVal, twistVal+yVal);
-    } else {
-        driveTrain.drive(0 , 0);
-    }
+  @Override
+
+  protected void execute() {
+
+    arduino.sendMessage(SubsystemIndex.ALL, "test");
+    System.out.println("jordan stop");
+
   }
+
+
 
   // Make this return true when this Command no longer needs to run execute()
+
+  @Override
+
   protected boolean isFinished() {
-      return false;
+
+    return false;
+
   }
+
+
 
   // Called once after isFinished returns true
+
+  @Override
+
   protected void end() {
-      driveTrain.drive(0, 0);
+
   }
 
+
+
   // Called when another command which requires one or more of the same
+
   // subsystems is scheduled to run
+
+  @Override
+
   protected void interrupted() {
-    driveTrain.drive(0, 0);
+
   }
+
 }

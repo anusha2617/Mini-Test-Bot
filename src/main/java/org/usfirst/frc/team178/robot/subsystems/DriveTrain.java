@@ -24,7 +24,7 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain(int v1, int v2)  {
 		left = new Victor(v1);
 		right = new Victor(v2);
-		Bumper = new DigitalInput(0);
+		Bumper = new DigitalInput(1); //changed from 0 to 1
 	}
 	
 	

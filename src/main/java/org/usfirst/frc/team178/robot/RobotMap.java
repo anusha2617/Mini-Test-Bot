@@ -11,6 +11,13 @@ public class RobotMap {
 	
     public static int left = 1;
     public static int right = 0;
+
+    public static int ArduinoAddress = 8;
+
+    public enum SubsystemIndex
+    {
+        ALL, BUMPER
+    }
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
     // public static int leftMotor = 1;

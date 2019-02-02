@@ -25,7 +25,8 @@ import org.usfirst.frc.team178.robot.subsystems.*;
 public class Robot extends /*IterativeRobot*/ TimedRobot {
 	//Autonomous autonomousVroom;
 	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.left, RobotMap.right);
-	public static OI oi;
+    public static OI oi;
+    public static Arduino arduino;
 
     Command autonomousCommand;
 
@@ -34,7 +35,8 @@ public class Robot extends /*IterativeRobot*/ TimedRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
+        oi = new OI();
+        arduino = new Arduino();
     //    chooser = new SendableChooser();
     //    chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());

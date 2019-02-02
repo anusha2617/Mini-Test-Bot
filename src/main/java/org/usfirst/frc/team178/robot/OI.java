@@ -8,8 +8,13 @@
 package org.usfirst.frc.team178.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
+
+import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
+import org.usfirst.frc.team178.robot.commands.SendMessage;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.usfirst.frc.team178.robot.subsystems.Arduino;
+
 
 public class OI {
     //// CREATING BUTTONS
@@ -18,6 +23,7 @@ public class OI {
     // number it is.
     // Joystick stick = new Joystick(port);
     // Button button = new JoystickButton(stick, buttonNumber);
+    Arduino arduino;
     public Joystick joystickMain = new Joystick(0);
     public Button button1 = new JoystickButton(joystickMain, 1);
 	public Button button2 = new JoystickButton(joystickMain, 2);
@@ -47,7 +53,14 @@ public class OI {
 	
 	public double getTwist () {
 		return joystickMain.getRawAxis(3);
-	}
+    }
+    
+    public OI()
+    {
+        buttonA.whenPressed(new SendMessage());
+        arduino = new Arduino();
+        arduino.sendMessage(SubsystemIndex.ALL, "test");
+    }
     
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
