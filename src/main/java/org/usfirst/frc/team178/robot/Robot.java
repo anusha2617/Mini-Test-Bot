@@ -27,6 +27,7 @@ public class Robot extends /*IterativeRobot*/ TimedRobot {
 	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.left, RobotMap.right);
     public static OI oi;
     public static Arduino arduino;
+    public static LinearActuator linearactuator;
 
     Command autonomousCommand;
 
@@ -37,6 +38,7 @@ public class Robot extends /*IterativeRobot*/ TimedRobot {
     public void robotInit() {
         oi = new OI();
         arduino = new Arduino();
+        linearactuator = new LinearActuator();
     //    chooser = new SendableChooser();
     //    chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
