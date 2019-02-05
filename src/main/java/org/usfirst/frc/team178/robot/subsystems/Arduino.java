@@ -50,9 +50,11 @@ public class Arduino extends Subsystem {
     for (String s : dataInStrings)
     System.out.print(s + ", ");
     System.out.println(); */ //this didn't really convert the byte data the right way and it kept saying zero 
-    byte dataFromPixy[] = new byte[2];
-    System.out.println(arduino.read(RobotMap.ArduinoAddress, 2, dataFromPixy));
-    for (byte b : dataFromPixy) {
+    byte[] dataFromPixy = new byte[2];
+    boolean success = arduino.read(RobotMap.ArduinoAddress, 2, dataFromPixy);
+    System.out.println(success);
+    //Byte[] actualData = (Byte[]) dataFromPixy;
+    for (byte b : actualData) {
     String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     System.out.print(s1 + ", ");
     } 
