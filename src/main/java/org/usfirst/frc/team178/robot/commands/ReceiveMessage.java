@@ -10,34 +10,29 @@ package org.usfirst.frc.team178.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team178.robot.OI;
 import org.usfirst.frc.team178.robot.Robot;
-import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
 import org.usfirst.frc.team178.robot.subsystems.Arduino;
 
-public class SendMessage extends Command {
-
+public class ReceiveMessage extends Command {
+  
   OI oi;
   Arduino arduino;
+  
+  public ReceiveMessage() {
 
-  public SendMessage() {
-
-  }
+    }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    oi = Robot.oi;
     arduino = Robot.arduino;
+    oi = Robot.oi;
   }
-
-
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    arduino.sendMessage(SubsystemIndex.ALL, "test");
+    arduino.receiveMessage();
   }
-
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -45,19 +40,16 @@ public class SendMessage extends Command {
     return false;
   }
 
-
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    
   }
-
-
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-
+    
   }
-
 }

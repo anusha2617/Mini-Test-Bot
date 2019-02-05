@@ -9,6 +9,10 @@ package org.usfirst.frc.team178.robot.subsystems;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.usfirst.frc.team178.robot.RobotMap;
 import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
 
@@ -29,6 +33,32 @@ public class Arduino extends Subsystem {
     arduino.writeBulk(message.getBytes());
     System.out.println(arduino.addressOnly());
   }
+
+  public void receiveMessage()
+  {
+    /*
+ //   ArrayList arr = new ArrayList()
+    byte dataFromPixy[] = new byte[10];
+    System.out.println(arduino.read(RobotMap.ArduinoAddress, 2, dataFromPixy));
+    String dataInStrings[] = new String[dataFromPixy.length];
+    int counter = 0;
+    for (byte b : dataFromPixy) {
+      Byte y = b;
+      dataInStrings[counter] = y.toString();
+      counter++;
+    }
+    for (String s : dataInStrings)
+    System.out.print(s + ", ");
+    System.out.println(); */ //this didn't really convert the byte data the right way and it kept saying zero 
+    byte dataFromPixy[] = new byte[2];
+    System.out.println(arduino.read(RobotMap.ArduinoAddress, 2, dataFromPixy));
+    for (byte b : dataFromPixy) {
+    String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
+    System.out.print(s1 + ", ");
+    } 
+    System.out.println();
+  }
+
 
   @Override
   public void initDefaultCommand() {

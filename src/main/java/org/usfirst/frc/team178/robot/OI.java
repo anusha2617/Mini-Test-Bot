@@ -10,6 +10,7 @@ package org.usfirst.frc.team178.robot;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
+import org.usfirst.frc.team178.robot.commands.ReceiveMessage;
 import org.usfirst.frc.team178.robot.commands.SendMessage;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -58,8 +59,7 @@ public class OI {
     public OI()
     {
         buttonA.whenPressed(new SendMessage());
-        arduino = new Arduino();
-        arduino.sendMessage(SubsystemIndex.ALL, "test");
+        buttonB.whileHeld(new ReceiveMessage());
     }
     
     // There are a few additional built in buttons you can use. Additionally,
