@@ -24,8 +24,8 @@ public class LinearActuator extends Subsystem {
     actuator = new Servo(RobotMap.linearActuator);
   }
 
-  public void set (int val) {
-    actuator.set(val);
+  public void setAngle(int degrees) {
+    actuator.setAngle(degrees);
   }
 
 
