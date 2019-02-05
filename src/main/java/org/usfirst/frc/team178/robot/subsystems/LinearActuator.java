@@ -11,24 +11,21 @@ import org.usfirst.frc.team178.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.PWMSpeedController;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Add your docs here.
  */
 public class LinearActuator extends Subsystem {
-  public static PWMSpeedController actuator;
+  public static Servo actuator;
 
   public LinearActuator () {
-    actuator = (PWMSpeedController) new PWM(RobotMap.linearActuator);
+    actuator = new Servo(RobotMap.linearActuator);
   }
 
-  public void extend () {
-    actuator.setInverted(true);
-  }
-
-  public void retract () {
-    actuator.setInverted(false);
+  public void set (int val) {
+    actuator.set(val);
   }
 
 

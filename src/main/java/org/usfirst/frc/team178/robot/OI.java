@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
 import org.usfirst.frc.team178.robot.commands.ReceiveMessage;
 import org.usfirst.frc.team178.robot.commands.SendMessage;
+import org.usfirst.frc.team178.robot.commands.SetActuator;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team178.robot.subsystems.Arduino;
@@ -60,6 +62,9 @@ public class OI {
     {
         buttonA.whenPressed(new SendMessage());
         buttonB.whileHeld(new ReceiveMessage());
+        buttonX.whenPressed(new SetActuator(700));
+        lBumper.whenPressed(new SetActuator(700));
+
     }
     
     // There are a few additional built in buttons you can use. Additionally,

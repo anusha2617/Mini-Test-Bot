@@ -54,7 +54,7 @@ public class Arduino extends Subsystem {
     boolean success = arduino.read(RobotMap.ArduinoAddress, 2, dataFromPixy);
     System.out.println(success);
     //Byte[] actualData = (Byte[]) dataFromPixy;
-    for (byte b : actualData) {
+    for (byte b : dataFromPixy) {
     String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     System.out.print(s1 + ", ");
     } 
