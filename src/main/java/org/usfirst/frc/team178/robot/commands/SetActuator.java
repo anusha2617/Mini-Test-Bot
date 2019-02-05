@@ -16,10 +16,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SetActuator extends Command {
   LinearActuator linearactuator;
   OI oi;
-  int amountExtended; // Value between 700 and 2300, 1500 being in the middle
+  int amountExtended; //angle degrees
+  
   public SetActuator(int x) {
     amountExtended = x;
-  //%  requires(Robot.linearactuator);
+    //requires(Robot.linearactuator);
   }
 
   // Called just before this Command runs the first time
@@ -31,7 +32,7 @@ public class SetActuator extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    linearactuator.set(amountExtended);
+    linearactuator.setAngle(amountExtended);
   }
 
   // Make this return true when this Command no longer needs to run execute()
