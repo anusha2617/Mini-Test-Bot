@@ -8,9 +8,9 @@
 package org.usfirst.frc.team178.robot.subsystems;
 
 import org.usfirst.frc.team178.robot.RobotMap;
+import org.usfirst.frc.team178.robot.Robot;
 
 import edu.wpi.first.wpilibj.PWM;
-import edu.wpi.first.wpilibj.PWMSpeedController;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -18,14 +18,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Add your docs here.
  */
 public class LinearActuator extends Subsystem {
-  public static Servo actuator;
+  public PWM actuator;
 
   public LinearActuator () {
-    actuator = new Servo(RobotMap.linearActuator);
+    actuator = new PWM(5);
   }
 
-  public void set (int val) {
-    actuator.set(val);
+  public void set (double val) {
+    actuator.setPosition(val);
+  }
+
+  public double get () {
+    return actuator.getPosition();
   }
 
 

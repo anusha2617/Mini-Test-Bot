@@ -10,6 +10,8 @@ package org.usfirst.frc.team178.robot;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
+import org.usfirst.frc.team178.robot.commands.GetActuator;
+import org.usfirst.frc.team178.robot.commands.Onwards;
 import org.usfirst.frc.team178.robot.commands.ReceiveMessage;
 import org.usfirst.frc.team178.robot.commands.SendMessage;
 import org.usfirst.frc.team178.robot.commands.SetActuator;
@@ -17,6 +19,7 @@ import org.usfirst.frc.team178.robot.commands.SetActuator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team178.robot.subsystems.Arduino;
+import org.usfirst.frc.team178.robot.subsystems.LinearActuator;
 
 
 public class OI {
@@ -62,8 +65,10 @@ public class OI {
     {
         buttonA.whenPressed(new SendMessage());
         buttonB.whileHeld(new ReceiveMessage());
-        buttonX.whenPressed(new SetActuator(700));
-        lBumper.whenPressed(new SetActuator(700));
+        buttonX.whenPressed(new SetActuator(0));
+        rBumper.whenPressed(new SetActuator(255));
+        buttonY.whenPressed(new GetActuator());
+       // buttonY.whenPressed(new SetActuator(0));
 
     }
     

@@ -13,7 +13,7 @@ import org.usfirst.frc.team178.robot.*;
 public class Onwards extends Command {
 	
 
-  public Onwards() {
+  public Onwards(int i) {
       // Use requires() here to declare subsystem dependencies
       // eg. requires(chassis);
     requires(Robot.drivetrain);

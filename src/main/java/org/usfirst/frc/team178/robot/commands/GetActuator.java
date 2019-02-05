@@ -7,19 +7,17 @@
 
 package org.usfirst.frc.team178.robot.commands;
 
-import org.usfirst.frc.team178.robot.OI;
 import org.usfirst.frc.team178.robot.Robot;
+
 import org.usfirst.frc.team178.robot.subsystems.LinearActuator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetActuator extends Command {
+public class GetActuator extends Command {
   LinearActuator linearactuator;
-  OI oi;
-  double amountExtended; // Value between 700 and 2300, 1500 being in the middle
-  public SetActuator(double x) {
-    amountExtended = x;
-  //%  requires(Robot.linearactuator);
+  public GetActuator() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
@@ -31,7 +29,7 @@ public class SetActuator extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    linearactuator.set(amountExtended);
+    System.out.println(linearactuator.get());
   }
 
   // Make this return true when this Command no longer needs to run execute()
