@@ -38,5 +38,6 @@ public class LinearActuator extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new SetActuator());
   }
 }
