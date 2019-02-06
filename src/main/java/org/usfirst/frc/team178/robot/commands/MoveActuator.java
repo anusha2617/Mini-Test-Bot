@@ -18,6 +18,7 @@ public class MoveActuator extends Command {
     LinearActuator linearactuator;
     double currentPosition;
     boolean movingForward;
+    double speed;
 
   public MoveActuator(boolean forward) {
     movingForward = forward;
@@ -35,12 +36,12 @@ public class MoveActuator extends Command {
   protected void execute() {
     if (movingForward) {
       if (currentPosition < 1 || currentPosition >= 0) {
-        currentPosition+=0.007;
+        currentPosition+=0.004;
         linearactuator.set(currentPosition);
       }
     } else {
       if (currentPosition <= 1 || currentPosition > 0) {
-        currentPosition-=0.007;
+        currentPosition-=0.004;
         linearactuator.set(currentPosition);
       }
     }
