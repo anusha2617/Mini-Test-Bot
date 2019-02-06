@@ -63,11 +63,11 @@ public class OI {
     
     public OI()
     {
-        buttonA.whenPressed(new SendMessage());
+        buttonA.whileHeld(new SendMessage());
         buttonB.whileHeld(new ReceiveMessage());
-        buttonX.whenPressed(new SetActuator(0));
-        rBumper.whenPressed(new SetActuator(255));
-        buttonY.whenPressed(new GetActuator());
+        buttonX.whileHeld(new SetActuator(0));
+        rBumper.whileHeld(new SetActuator(255));
+        //buttonY.whenPressed(new GetActuator());
        // buttonY.whenPressed(new SetActuator(0));
 
     }

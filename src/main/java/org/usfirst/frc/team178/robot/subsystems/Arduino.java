@@ -36,20 +36,6 @@ public class Arduino extends Subsystem {
 
   public void receiveMessage()
   {
-    /*
- //   ArrayList arr = new ArrayList()
-    byte dataFromPixy[] = new byte[10];
-    System.out.println(arduino.read(RobotMap.ArduinoAddress, 2, dataFromPixy));
-    String dataInStrings[] = new String[dataFromPixy.length];
-    int counter = 0;
-    for (byte b : dataFromPixy) {
-      Byte y = b;
-      dataInStrings[counter] = y.toString();
-      counter++;
-    }
-    for (String s : dataInStrings)
-    System.out.print(s + ", ");
-    System.out.println(); */ //this didn't really convert the byte data the right way and it kept saying zero 
     byte[] dataFromPixy = new byte[2];
     boolean success = arduino.read(RobotMap.ArduinoAddress, 2, dataFromPixy);
     System.out.println(success);

@@ -8,6 +8,7 @@
 package org.usfirst.frc.team178.robot.subsystems;
 
 import org.usfirst.frc.team178.robot.RobotMap;
+import org.usfirst.frc.team178.robot.commands.SetActuator;
 import org.usfirst.frc.team178.robot.Robot;
 
 import edu.wpi.first.wpilibj.PWM;
@@ -38,6 +39,6 @@ public class LinearActuator extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new SetActuator());
+    //setDefaultCommand(new SetActuator(.5));
   }
 }
