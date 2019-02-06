@@ -18,7 +18,7 @@ public class ExtendActuator extends Command {
   double currentPositon;
 
   public ExtendActuator() {
-    requires(Robot.linearactuator);
+    //requires(Robot.linearactuator);
   }
 
   // Called just before this Command runs the first time
@@ -31,10 +31,11 @@ public class ExtendActuator extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (currentPositon < 255 || currentPositon >= 0) {
-      currentPositon++;
+    if (currentPositon < 1 || currentPositon >= 0) {
+      currentPositon = currentPositon + 0.01;
+      linearactuator.set(currentPositon);
     }
-    linearactuator.set(currentPositon);
+    System.out.println(currentPositon);
   }
 
   // Make this return true when this Command no longer needs to run execute()

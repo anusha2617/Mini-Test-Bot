@@ -11,34 +11,41 @@ import org.usfirst.frc.team178.robot.Robot;
 import org.usfirst.frc.team178.robot.subsystems.LinearActuator;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.WaitUntilCommand;
 
+public class MoveActuator extends Command {
 
-public class RetractActuator extends Command {
+    LinearActuator linearactuator;
+    double currentPosition;
+    boolean movingForward;
 
-  LinearActuator linearactuator;
-  double currentPositon;
-  
-  public RetractActuator() {
-    //requires(Robot.linearactuator);
+  public MoveActuator(boolean forward) {
+    movingForward = forward;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     linearactuator = Robot.linearactuator;
-    currentPositon = 0;
+    currentPosition = linearactuator.get();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (currentPositon <= 1 || currentPositon > 0) {
-      currentPositon = currentPositon - 0.01;
-      linearactuator.set(currentPositon);
+    if (movingForward) {
+      if (currentPosition < 1 || currentPosition >= 0) {
+        currentPosition+=0.007;
+        linearactuator.set(currentPosition);
+      }
+    } else {
+      if (currentPosition <= 1 || currentPosition > 0) {
+        currentPosition-=0.007;
+        linearactuator.set(currentPosition);
+      }
     }
-    System.out.println(currentPositon);
+    System.out.println(linearactuator.get());
   }
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

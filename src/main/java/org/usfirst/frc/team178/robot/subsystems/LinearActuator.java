@@ -22,7 +22,7 @@ public class LinearActuator extends Subsystem {
   public PWM actuator;
 
   public LinearActuator () {
-    actuator = new PWM(5);
+    actuator = new PWM(RobotMap.linearActuator);
   }
 
   public void set (double val) {

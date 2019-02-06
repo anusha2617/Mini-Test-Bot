@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
 import org.usfirst.frc.team178.robot.commands.ExtendActuator;
 import org.usfirst.frc.team178.robot.commands.GetActuator;
+import org.usfirst.frc.team178.robot.commands.MoveActuator;
 import org.usfirst.frc.team178.robot.commands.Onwards;
 import org.usfirst.frc.team178.robot.commands.ReceiveMessage;
 import org.usfirst.frc.team178.robot.commands.RetractActuator;
@@ -67,8 +68,8 @@ public class OI {
     {
         buttonA.whileHeld(new SendMessage());
         buttonB.whileHeld(new ReceiveMessage());
-        buttonX.whileHeld(new ExtendActuator());
-        rBumper.whileHeld(new RetractActuator());
+        buttonX.whileHeld(new MoveActuator(true));
+        buttonY.whileHeld(new MoveActuator(false));
         //buttonY.whenPressed(new GetActuator());
        // buttonY.whenPressed(new SetActuator(0));
 
