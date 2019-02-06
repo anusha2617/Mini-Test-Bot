@@ -34,9 +34,9 @@ public class Arduino extends Subsystem {
     System.out.println(arduino.addressOnly());
   }
 
-  public void receiveMessage()
+  public byte[] receiveMessage()
   {
-    byte[] dataFromPixy = new byte[1];
+    byte[] dataFromPixy = new byte[2];
     boolean success = arduino.read(RobotMap.ArduinoAddress, 1, dataFromPixy);
     System.out.println(success);
     for (byte b : dataFromPixy) {
@@ -44,6 +44,8 @@ public class Arduino extends Subsystem {
     System.out.print(s1 + ", ");
     } 
     System.out.println();
+
+    return dataFromPixy;
   }
 
 
