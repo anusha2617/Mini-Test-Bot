@@ -7,43 +7,46 @@
 
 package org.usfirst.frc.team178.robot.commands;
 
-import org.usfirst.frc.team178.robot.OI;
 import org.usfirst.frc.team178.robot.Robot;
 import org.usfirst.frc.team178.robot.subsystems.LinearActuator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetActuator extends Command {
+public class ExtendActuator extends Command {
+
   LinearActuator linearactuator;
-  OI oi;
-  int position;
-  double amountExtended; // Value between 0 and 255
-  public SetActuator(double x) {
-    amountExtended = x;
-    //requires(Robot.linearactuator);
+  double currentPositon;
+
+  public ExtendActuator() {
+    requires(Robot.linearactuator);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     linearactuator = Robot.linearactuator;
+    currentPositon = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    linearactuator.set(amountExtended);
+    if (currentPositon < 255 || currentPositon >= 0) {
+      currentPositon++;
+    }
+    linearactuator.set(currentPositon);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false; 
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    
   }
 
   // Called when another command which requires one or more of the same
