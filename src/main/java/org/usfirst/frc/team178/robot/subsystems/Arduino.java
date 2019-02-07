@@ -23,9 +23,16 @@ public class Arduino extends Subsystem {
   private I2C arduino;
   public int firstLocation;
   public int secondLocation;
+  public boolean pixy;
 
-  public Arduino() {
-    arduino = new I2C(I2C.Port.kOnboard, RobotMap.ArduinoAddress); // check these values
+  public Arduino(boolean fromPixy) {
+    if (fromPixy) {
+    arduino = new I2C(I2C.Port.kOnboard, RobotMap.pixyAddress); // check these values
+    pixy = true;
+  } else { 
+    arduino = new I2C(I2C.Port.kOnboard, RobotMap.tofAddress);  
+    pixy = false;
+  }
     firstLocation = 0;
     secondLocation = 0;
   }
@@ -41,19 +48,24 @@ public class Arduino extends Subsystem {
 
   public byte[] receiveMessage()
   {
-    byte[] dataFromPixy = new byte[1];
-    boolean success = arduino.read(RobotMap.ArduinoAddress, 1, dataFromPixy);
-    System.out.println(success);
-    for (byte b : dataFromPixy) {
+    byte[] dataFromCamera = new byte[1];
+    boolean success = true;
+    if (pixy) {
+      success = arduino.read(RobotMap.pixyAddress, 1, dataFromCamera);
+    } else {
+      success = arduino.read(RobotMap.tofAddress, 1, dataFromCamera);
+    }
+      System.out.println(success);
+    for (byte b : dataFromCamera) {
     String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     System.out.print(s1 + ", ");
     } 
     System.out.println();
 
-    return dataFromPixy;
+    return dataFromCamera;
   }
 
-  public void checkForPixyValues () {
+  public void checkForValues () {
     byte[] coordinatesFromPixy = receiveMessage();
     String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
     int counter = 1;

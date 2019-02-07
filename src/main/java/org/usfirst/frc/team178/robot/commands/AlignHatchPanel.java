@@ -15,7 +15,7 @@ import org.usfirst.frc.team178.robot.subsystems.LinearActuator;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class AlignHatchPanel extends Command {
-  Arduino arduino;
+  Arduino pixyArduino;
   OI oi;
   LinearActuator linearactuator;
 
@@ -28,7 +28,7 @@ public class AlignHatchPanel extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    arduino = Robot.arduino;
+    pixyArduino = Robot.pixyArduino;
     linearactuator = Robot.linearactuator;
   }
 
@@ -36,9 +36,9 @@ public class AlignHatchPanel extends Command {
   @Override
   protected void execute() {
     double desiredavg = 159;
-    arduino.checkForPixyValues();
-    int firstLocation = arduino.firstLocation;
-    int secondLocation = arduino.secondLocation;
+    pixyArduino.checkForValues();
+    int firstLocation = pixyArduino.firstLocation;
+    int secondLocation = pixyArduino.secondLocation;
     double x1 = (double) firstLocation;
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2;
@@ -62,6 +62,7 @@ public class AlignHatchPanel extends Command {
   @Override
   protected void end() {
   }
+  
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run

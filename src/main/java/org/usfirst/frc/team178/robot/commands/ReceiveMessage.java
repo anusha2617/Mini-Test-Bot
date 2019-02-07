@@ -24,7 +24,7 @@ public class ReceiveMessage extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    arduino = Robot.arduino;
+    arduino = Robot.pixyArduino;
     oi = Robot.oi;
   }
 
