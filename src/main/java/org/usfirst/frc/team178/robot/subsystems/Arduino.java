@@ -21,13 +21,13 @@ import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
  */
 public class Arduino extends Subsystem {
   private I2C arduino;
-  public int[] firstLocation;
-  public int[] secondLocation;
+  public int firstLocation;
+  public int secondLocation;
 
   public Arduino() {
     arduino = new I2C(I2C.Port.kOnboard, RobotMap.ArduinoAddress); // check these values
-    firstLocation = new int[2];
-    secondLocation = new int[2];
+    firstLocation = 0;
+    secondLocation = 0;
   }
 
   public void sendMessage(SubsystemIndex subsystem, String pattern) {
@@ -41,7 +41,7 @@ public class Arduino extends Subsystem {
 
   public byte[] receiveMessage()
   {
-    byte[] dataFromPixy = new byte[4];
+    byte[] dataFromPixy = new byte[1];
     boolean success = arduino.read(RobotMap.ArduinoAddress, 1, dataFromPixy);
     System.out.println(success);
     for (byte b : dataFromPixy) {
@@ -56,10 +56,8 @@ public class Arduino extends Subsystem {
   public void checkForPixyValues () {
     byte[] coordinatesFromPixy = receiveMessage();
     String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
-    String y1Binary = ((Byte) coordinatesFromPixy[1]).toString();
     int counter = 1;
     int x1 = 0;
-    int y1 = 0;
     for (int i = x1Binary.length(); i >= 0; i--) {
       if (x1Binary.charAt(i) == '1') {
         x1 = x1 + counter;
@@ -67,34 +65,20 @@ public class Arduino extends Subsystem {
       counter = counter * 2;
     }
     counter = 0;
-    for (int i = y1Binary.length(); i >= 0; i--) {
-      if (y1Binary.charAt(i) == '1') {
-        y1 = y1 + counter;
-      }
-      counter = counter * 2;
-    }
-    String x2Binary = ((Byte) coordinatesFromPixy[2]).toString();
-    String y2Binary = ((Byte) coordinatesFromPixy[3]).toString();
+    
+    // delay
+    coordinatesFromPixy = receiveMessage();
+    String x2Binary = ((Byte) coordinatesFromPixy[0]).toString();
     counter = 1;
     int x2 = 0;
-    int y2 = 0;
     for (int i = x2Binary.length(); i >= 0; i--) {
       if (x2Binary.charAt(i) == '1') {
         x2 = x2 + counter;
       }
       counter = counter * 2;
     }
-    counter = 0;
-    for (int i = y2Binary.length(); i >= 0; i--) {
-      if (y2Binary.charAt(i) == '1') {
-        y2 = y2 + counter;
-      }
-      counter = counter * 2;
-    }
     firstLocation[0] = x1;
-    firstLocation[1] = y1;
     secondLocation[0] = x2;
-    secondLocation[1] = y2;
   }
 
 

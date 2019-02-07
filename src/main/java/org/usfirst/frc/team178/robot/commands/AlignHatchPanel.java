@@ -7,10 +7,18 @@
 
 package org.usfirst.frc.team178.robot.commands;
 
+import org.usfirst.frc.team178.robot.OI;
+import org.usfirst.frc.team178.robot.Robot;
+import org.usfirst.frc.team178.robot.subsystems.Arduino;
+import org.usfirst.frc.team178.robot.subsystems.LinearActuator;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class AlignHatchPanel extends Command {
-  
+  Arduino arduino;
+  OI oi;
+  LinearActuator linearactuator;
+
   public AlignHatchPanel() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -19,11 +27,17 @@ public class AlignHatchPanel extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    oi = Robot.oi;
+    arduino = Robot.arduino;
+    linearactuator = Robot.linearactuator;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    arduino.checkForPixyValues();
+    int firstLocation = arduino.firstLocation;
+    int secondLocation = arduino.secondLocation;
   }
 
   // Make this return true when this Command no longer needs to run execute()
