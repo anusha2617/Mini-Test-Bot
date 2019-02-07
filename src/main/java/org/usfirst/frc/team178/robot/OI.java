@@ -64,7 +64,7 @@ public class OI {
     
     public OI()
     {
-        buttonA.whileHeld(new SendMessage());
+        buttonA.whileHeld(new SendMessage("o"));
         buttonB.whileHeld(new ReceiveMessage());
         buttonX.whileHeld(new MoveActuator(true));
         buttonY.whileHeld(new MoveActuator(false));
