@@ -65,7 +65,7 @@ public class Arduino extends Subsystem {
     return dataFromCamera;
   }
 
-  public void checkForValues () {
+  public void checkForPixyValues () {
     byte[] coordinatesFromPixy = receiveMessage();
     String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
     int counter = 1;
@@ -92,6 +92,22 @@ public class Arduino extends Subsystem {
     firstLocation = x1;
     secondLocation = x2;
   }
+
+  public int getTofDistance () {
+    byte[] tofDistance = receiveMessage();
+    String dist = ((Byte) tofDistance[0]).toString();
+    int counter = 1;
+    int distance = 0;
+    for (int i = dist.length(); i >= 0; i--) {
+      if (dist.charAt(i) == '1') {
+        distance = distance + counter;
+      }
+      counter = counter * 2;
+    }
+    System.out.println(distance);
+    return distance;
+    }
+  
 
 
   @Override
