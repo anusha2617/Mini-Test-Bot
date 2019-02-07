@@ -15,11 +15,11 @@ import org.usfirst.frc.team178.robot.subsystems.LinearActuator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PixyMovement extends Command {
+public class ConvertPixyValues extends Command {
   OI oi;
   Arduino arduino;
   LinearActuator linearactuator;
-  public PixyMovement() {
+  public ConvertPixyValues() {
 
   }
 
@@ -35,6 +35,24 @@ public class PixyMovement extends Command {
   @Override
   protected void execute() {
     byte[] coordinatesFromPixy = arduino.receiveMessage();
+    String xBinary = ((Byte) coordinatesFromPixy[0]).toString();
+    String yBinary = ((Byte) coordinatesFromPixy[1]).toString();
+    int counter = 1;
+    int x = 0;
+    int y = 0;
+    for (int i = xBinary.length(); i >= 0; i--) {
+      if (xBinary.charAt(i) == '1') {
+        x = x + counter;
+      }
+      counter = counter * 2;
+    }
+    counter = 0;
+    for (int i = yBinary.length(); i >= 0; i--) {
+      if (yBinary.charAt(i) == '1') {
+        y = y + counter;
+      }
+      counter = counter * 2;
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
