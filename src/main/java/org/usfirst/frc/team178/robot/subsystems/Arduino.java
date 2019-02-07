@@ -27,7 +27,8 @@ public class Arduino extends Subsystem {
   }
 
   public void sendMessage(SubsystemIndex subsystem, String pattern) {
-    String message = subsystem.ordinal() + pattern;
+    //String message = subsystem.ordinal() + pattern;
+    String message = pattern; 
     message = message.toLowerCase();
     System.out.println(message);
     arduino.writeBulk(message.getBytes());
