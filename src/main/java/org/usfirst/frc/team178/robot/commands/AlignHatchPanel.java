@@ -35,9 +35,21 @@ public class AlignHatchPanel extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double desiredavg = 159;
     arduino.checkForPixyValues();
     int firstLocation = arduino.firstLocation;
     int secondLocation = arduino.secondLocation;
+    double x1 = (double) firstLocation;
+    double x2 = (double) secondLocation; 
+    double avg = (x1 + x2)/2;
+    while(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){
+      double diff = desiredavg-avg;
+      if (diff>desiredavg){
+        linearactuator.moveActuator(false);
+      } else {
+        linearactuator.moveActuator(true);
+      }
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

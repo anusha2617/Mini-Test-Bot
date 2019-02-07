@@ -32,7 +32,7 @@ public class Arduino extends Subsystem {
 
   public void sendMessage(SubsystemIndex subsystem, String pattern) {
     //String message = subsystem.ordinal() + pattern;
-    String message = pattern; 
+    String message = pattern;
     message = message.toLowerCase();
     System.out.println(message);
     arduino.writeBulk(message.getBytes());
@@ -77,8 +77,8 @@ public class Arduino extends Subsystem {
       }
       counter = counter * 2;
     }
-    firstLocation[0] = x1;
-    secondLocation[0] = x2;
+    firstLocation = x1;
+    secondLocation = x2;
   }
 
 

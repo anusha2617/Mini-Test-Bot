@@ -8,6 +8,7 @@
 package org.usfirst.frc.team178.robot.subsystems;
 
 import org.usfirst.frc.team178.robot.RobotMap;
+import org.usfirst.frc.team178.robot.commands.MoveActuator;
 import org.usfirst.frc.team178.robot.commands.SetActuator;
 import org.usfirst.frc.team178.robot.Robot;
 
@@ -31,6 +32,22 @@ public class LinearActuator extends Subsystem {
 
   public double get () {
     return actuator.getPosition();
+  }
+
+  public void moveActuator (boolean movingForward) {
+    double currentPosition = get();
+    if (movingForward) {
+      if (currentPosition < 1 || currentPosition >= 0) {
+        currentPosition+=0.004;
+        set(currentPosition);
+      }
+    } else {
+      if (currentPosition <= 1 || currentPosition > 0) {
+        currentPosition-=0.004;
+        set(currentPosition);
+      }
+    }
+    System.out.println(get());
   }
 
 
