@@ -12,7 +12,8 @@ public class RobotMap {
     public static int left = 1;
     public static int right = 0;
 
-    public static int ArduinoAddress = 8;
+    public static int pixyAddress = 8;
+    public static int tofAddress = 18;
     public static int linearActuator = 3;
 
     public enum SubsystemIndex

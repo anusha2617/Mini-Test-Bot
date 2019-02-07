@@ -7,45 +7,33 @@
 
 package org.usfirst.frc.team178.robot.commands;
 
+import org.usfirst.frc.team178.robot.OI;
 import org.usfirst.frc.team178.robot.Robot;
 import org.usfirst.frc.team178.robot.subsystems.LinearActuator;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.WaitUntilCommand;
 
 public class MoveActuator extends Command {
-
-    LinearActuator linearactuator;
-    double currentPosition;
-    boolean movingForward;
-    double speed;
-
-  public MoveActuator(boolean forward) {
-    movingForward = forward;
+  LinearActuator linearactuator;
+  OI oi;
+  boolean moveForward;
+  public MoveActuator(boolean fwd) {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    moveForward = fwd;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     linearactuator = Robot.linearactuator;
-    currentPosition = linearactuator.get();
+    oi = Robot.oi;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (movingForward) {
-      if (currentPosition < 1 || currentPosition >= 0) {
-        currentPosition+=0.004;
-        linearactuator.set(currentPosition);
-      }
-    } else {
-      if (currentPosition <= 1 || currentPosition > 0) {
-        currentPosition-=0.004;
-        linearactuator.set(currentPosition);
-      }
-    }
-    System.out.println(linearactuator.get());
+    linearactuator.moveActuator(moveForward);
   }
 
   // Make this return true when this Command no longer needs to run execute()
