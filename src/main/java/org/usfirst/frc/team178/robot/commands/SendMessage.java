@@ -17,11 +17,10 @@ public class SendMessage extends Command {
 
   OI oi;
   Arduino arduino;
-  String text;
+  String t; 
 
-  public SendMessage(String text) {
-    this.text = text;
-
+  public SendMessage(String t) {
+  this.t = t;
   }
 
   // Called just before this Command runs the first time
@@ -36,7 +35,7 @@ public class SendMessage extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    arduino.sendMessage(SubsystemIndex.ALL, text);
+    arduino.sendMessage(SubsystemIndex.ALL, t);
   }
 
 
