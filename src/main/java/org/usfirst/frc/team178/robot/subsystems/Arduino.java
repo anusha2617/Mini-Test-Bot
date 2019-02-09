@@ -70,7 +70,7 @@ public class Arduino extends Subsystem {
     String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
     int counter = 1;
     int x1 = 0;
-    for (int i = x1Binary.length(); i >= 0; i--) {
+    for (int i = x1Binary.length() - 1; i >= 0; i--) {
       if (x1Binary.charAt(i) == '1') {
         x1 = x1 + counter;
       }
@@ -83,7 +83,7 @@ public class Arduino extends Subsystem {
     String x2Binary = ((Byte) coordinatesFromPixy[0]).toString();
     counter = 1;
     int x2 = 0;
-    for (int i = x2Binary.length(); i >= 0; i--) {
+    for (int i = x2Binary.length() - 1; i >= 0; i--) {
       if (x2Binary.charAt(i) == '1') {
         x2 = x2 + counter;
       }
@@ -98,7 +98,7 @@ public class Arduino extends Subsystem {
     String dist = ((Byte) tofDistance[0]).toString();
     int counter = 1;
     int distance = 0;
-    for (int i = dist.length(); i >= 0; i--) {
+    for (int i = dist.length() - 1; i >= 0; i--) {
       if (dist.charAt(i) == '1') {
         distance = distance + counter;
       }
