@@ -18,7 +18,10 @@ import org.usfirst.frc.team178.robot.commands.SendMessage;
 import org.usfirst.frc.team178.robot.commands.SetActuator;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+//import edu.wpi.first.wpilibj
 import org.usfirst.frc.team178.robot.subsystems.Arduino;
 import org.usfirst.frc.team178.robot.subsystems.LinearActuator;
 
@@ -31,7 +34,7 @@ public class OI {
     // Joystick stick = new Joystick(port);
     // Button button = new JoystickButton(stick, buttonNumber);
     Arduino arduino;
-    public Joystick joystickMain = new Joystick(0);
+    public Joystick joystickMain = new Joystick(1);
     public Button button1 = new JoystickButton(joystickMain, 1);
 	public Button button2 = new JoystickButton(joystickMain, 2);
 	public Button button3 = new JoystickButton(joystickMain, 3);
@@ -40,6 +43,10 @@ public class OI {
 	public Button button6 = new JoystickButton(joystickMain, 6);
     public Button button7 = new JoystickButton(joystickMain, 7);
     
+    public XboxController xbox = new XboxController(0);
+    public Button buttonA = new JoystickButton(xbox, 1);
+    //xbox.getAButton();
+    /*
     public Joystick xbox = new Joystick(1);
     public Button buttonA = new JoystickButton(xbox, 1);
 	public Button buttonB = new JoystickButton(xbox, 2);
@@ -49,6 +56,7 @@ public class OI {
 	public Button rBumper = new JoystickButton(xbox, 6);
 	public Button backButton = new JoystickButton(xbox, 7);
     public Button startButton = new JoystickButton(xbox, 8);
+    */    
     
     public double getX () {
 		return joystickMain.getX();
@@ -63,17 +71,27 @@ public class OI {
     }
     
     public OI()
-    {
-        lBumper.whileHeld(new SendMessage("o"));
-        rBumper.whileHeld(new SendMessage("f"));
+    {       
+        buttonA.whileHeld(new SendMessage("l"));
+        
+        while (xbox.getAButton() == true)
+        {
+            new SendMessage("l");
+        }
+        
+        /*lBumper.whenPressed(new SendMessage("l"));
+        lBumper.whileHeld(new SendMessage("y"));
+        rBumper.whileHeld(new SendMessage("r"));
         buttonA.whileHeld(new SendMessage("a"));
         buttonB.whileHeld(new SendMessage("b"));
+        backButton.whileHeld(new SendMessage("f"));
+        startButton.whileHeld(new SendMessage("s"));
         //buttonB.whileHeld(new ReceiveMessage());
         buttonX.whileHeld(new MoveActuator(true));
         buttonY.whileHeld(new MoveActuator(false));
         //buttonY.whenPressed(new GetActuator());
        // buttonY.whenPressed(new SetActuator(0));
-
+        */
     }
     
     // There are a few additional built in buttons you can use. Additionally,

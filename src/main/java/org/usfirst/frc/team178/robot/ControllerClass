@@ -1,0 +1,78 @@
+package org.usfirst.frc.team178.robot;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.hal.HAL;
+
+public class ControllerClass extends Joystick
+{
+    public ControllerClass(int port)
+    {
+        super(port);
+        //TODO Auto-generated constructor stub
+    }
+
+    public JoystickButton buttonA = new JoystickButton(xbox, 1);
+    public JoystickButton buttonB = new JoystickButton(xbox, 2);
+    public JoystickButton buttonX = new JoystickButton(xbox, 3);
+    public JoystickButton buttonY = new JoystickButton(xbox, 4);
+    public JoystickButton rBumper = new JoystickButton(xbox, 6);
+    public JoystickButton lBumper = new JoystickButton(xbox, 5);
+    public JoystickButton startButton = new JoystickButton(xbox, 8);
+    public JoystickButton backButton = new JoystickButton(xbox, 7);
+    public JoystickButton leftStickButton = new JoystickButton(xbox, 9);
+    public JoystickButton rightStickButton = new JoystickButton(xbox, 10);
+    
+    public Button leftTriggerButton = new XboxLeftTrigger(xbox);
+    public Button rightTriggerButton = new XboxRightTrigger(xbox);
+
+    private int m_outputs;
+    private short m_leftRumble;
+    private short m_rightRumble;
+
+    public double getTriggerTwist() {
+		double leftTriggerValue = xbox.getRawAxis(2);
+		double rightTriggerValue = -1 * xbox.getRawAxis(3);
+
+		return leftTriggerValue + rightTriggerValue;
+
+	}
+
+	public double getLeftStickX() {
+		return xbox.getRawAxis(0);
+	}
+
+	public double getLeftStickY() {
+		return -xbox.getRawAxis(1);
+	}
+
+	public double getRightStickX() {
+		return xbox.getRawAxis(4); // 4
+	}
+
+	public double getRightStickY() {
+		return -xbox.getRawAxis(5);
+	}
+
+	public void setRumble(double leftValue, double rightValue) {
+		setRumble(RumbleType.kLeftRumble, leftValue);
+		setRumble(RumbleType.kRightRumble, rightValue);
+	}
+
+	public void setRumble(RumbleType type, double value) {
+		if (value < 0) {
+			value = 0;
+		} else if (value > 1) {
+			value = 1;
+		}
+		if (type == RumbleType.kLeftRumble) {
+			m_leftRumble = (short) (value * 65535);
+		} else {
+			m_rightRumble = (short) (value * 65535);
+		}
+		HAL.setJoystickOutputs((byte) getPort(), m_outputs, m_leftRumble, m_rightRumble);
+	}
+
+}
+}
