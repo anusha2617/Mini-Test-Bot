@@ -35,14 +35,14 @@ public class AlignHatchPanel extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double desiredavg = 159;
+    double desiredavg = 159;//has middle line, then compares average of two x values of objects 
     pixyArduino.checkForPixyValues();
     int firstLocation = pixyArduino.firstLocation;
     int secondLocation = pixyArduino.secondLocation;
     double x1 = (double) firstLocation;
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2;
-    while(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){
+    while(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){//margin of error for pixy values, need to test + adjust 
       double diff = desiredavg-avg;
       if (diff>desiredavg){
         linearactuator.moveActuator(false);
