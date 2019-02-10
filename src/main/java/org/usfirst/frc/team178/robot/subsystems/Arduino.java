@@ -48,29 +48,29 @@ public class Arduino extends Subsystem {
 
   public byte[] receiveMessage()
   {
-    byte[] dataFromCamera = new byte[1];
+    byte[] dataFromArduino = new byte[2];//change based on type of data 
     boolean success = true;
     if (pixy) {
-      success = arduino.read(RobotMap.pixyAddress, 1, dataFromCamera);
+      success = arduino.read(RobotMap.pixyAddress, 1, dataFromArduino);
     } else {
-      success = arduino.read(RobotMap.tofAddress, 1, dataFromCamera);
+      success = arduino.read(RobotMap.tofAddress, 1, dataFromArduino);
     }
       System.out.println(success);
-    for (byte b : dataFromCamera) {
+    for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
     String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     System.out.print(s1 + ", ");
     } 
     System.out.println();
 
-    return dataFromCamera;
+    return dataFromArduino;
   }
 
   public void checkForPixyValues () {
-    byte[] coordinatesFromPixy = receiveMessage();
+    byte[] coordinatesFromPixy = receiveMessage();//gets first x value from pixy
     String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
     int counter = 1;
     int x1 = 0;
-    for (int i = x1Binary.length() - 1; i >= 0; i--) {
+    for (int i = x1Binary.length() - 1; i >= 0; i--) {//converts binary to base 10
       if (x1Binary.charAt(i) == '1') {
         x1 = x1 + counter;
       }
@@ -79,11 +79,11 @@ public class Arduino extends Subsystem {
     counter = 0;
     
     // delay
-    coordinatesFromPixy = receiveMessage();
+    coordinatesFromPixy = receiveMessage();//gets second x value from pixy 
     String x2Binary = ((Byte) coordinatesFromPixy[0]).toString();
     counter = 1;
     int x2 = 0;
-    for (int i = x2Binary.length() - 1; i >= 0; i--) {
+    for (int i = x2Binary.length() - 1; i >= 0; i--) {//converts binary to base 10
       if (x2Binary.charAt(i) == '1') {
         x2 = x2 + counter;
       }
@@ -98,7 +98,7 @@ public class Arduino extends Subsystem {
     String dist = ((Byte) tofDistance[0]).toString();
     int counter = 1;
     int distance = 0;
-    for (int i = dist.length() - 1; i >= 0; i--) {
+    for (int i = dist.length() - 1; i >= 0; i--) {//converts binary to base 10 
       if (dist.charAt(i) == '1') {
         distance = distance + counter;
       }
