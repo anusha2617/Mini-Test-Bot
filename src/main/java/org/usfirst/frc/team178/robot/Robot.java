@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team178.robot;
 
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.*;
 import edu.wpi.first.wpilibj.command.Command;
@@ -26,8 +27,9 @@ public class Robot extends /*IterativeRobot*/ TimedRobot {
 	//Autonomous autonomousVroom;
 	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.left, RobotMap.right);
     public static OI oi;
-    public static Arduino pixyArduino;
-    public static Arduino tofArduino;
+    public static Pixy pixyArduino;
+    public static TimeOfFlight tofArduino1;
+    public static TimeOfFlight tofArduino2;
     public static LinearActuator linearactuator;
 
     Command autonomousCommand;
@@ -38,8 +40,9 @@ public class Robot extends /*IterativeRobot*/ TimedRobot {
      */
     public void robotInit() {
         oi = new OI();
-        pixyArduino = new Arduino(true);
-        tofArduino = new Arduino(false);
+        pixyArduino = new Pixy();
+        tofArduino1 = new TimeOfFlight(1);
+        tofArduino2 = new TimeOfFlight(2);
         linearactuator = new LinearActuator();
     //    chooser = new SendableChooser();
     //    chooser.addDefault("Default Auto", new ExampleCommand());

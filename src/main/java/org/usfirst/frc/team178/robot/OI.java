@@ -70,8 +70,8 @@ public class OI {
     
     public OI()
     {     
-        lBumper.whileHeld(new SendMessage("l"));
-        rBumper.whileHeld(new SendMessage("r"));
+        lBumper.whileHeld(new SendMessage("c"));
+        rBumper.whileHeld(new SendMessage("h"));
         buttonA.whileHeld(new SendMessage("a"));
         buttonB.whileHeld(new SendMessage("b"));
         backButton.whileHeld(new SendMessage("f"));

@@ -8,6 +8,7 @@
 package org.usfirst.frc.team178.robot.subsystems;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import java.util.ArrayList;
@@ -20,21 +21,10 @@ import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
  * Add your docs here.
  */
 public class Arduino extends Subsystem {
-  private I2C arduino;
-  public int firstLocation;
-  public int secondLocation;
-  public boolean pixy;
+  protected I2C arduino;
 
-  public Arduino(boolean fromPixy) {
-    if (fromPixy) {
-    arduino = new I2C(I2C.Port.kOnboard, RobotMap.pixyAddress); // check these values
-    pixy = true;
-  } else { 
-    arduino = new I2C(I2C.Port.kOnboard, RobotMap.tofAddress);  
-    pixy = false;
-  }
-    firstLocation = 0;
-    secondLocation = 0;
+  public Arduino(Port port , int address) {
+    arduino = new I2C(port, address); // check these values
   }
 
   public void sendMessage(SubsystemIndex subsystem, String pattern) {
@@ -49,13 +39,6 @@ public class Arduino extends Subsystem {
   public byte[] receiveMessage()
   {
     byte[] dataFromArduino = new byte[2];//change based on type of data 
-    boolean success = true;
-    if (pixy) {
-      success = arduino.read(RobotMap.pixyAddress, 1, dataFromArduino);
-    } else {
-      success = arduino.read(RobotMap.tofAddress, 1, dataFromArduino);
-    }
-      System.out.println(success);
     for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
     String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     System.out.print(s1 + ", ");
@@ -64,51 +47,6 @@ public class Arduino extends Subsystem {
 
     return dataFromArduino;
   }
-
-  public void checkForPixyValues () {
-    byte[] coordinatesFromPixy = receiveMessage();//gets first x value from pixy
-    String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
-    int counter = 1;
-    int x1 = 0;
-    for (int i = x1Binary.length() - 1; i >= 0; i--) {//converts binary to base 10
-      if (x1Binary.charAt(i) == '1') {
-        x1 = x1 + counter;
-      }
-      counter = counter * 2;
-    }
-    counter = 0;
-    
-    // delay
-    coordinatesFromPixy = receiveMessage();//gets second x value from pixy 
-    String x2Binary = ((Byte) coordinatesFromPixy[0]).toString();
-    counter = 1;
-    int x2 = 0;
-    for (int i = x2Binary.length() - 1; i >= 0; i--) {//converts binary to base 10
-      if (x2Binary.charAt(i) == '1') {
-        x2 = x2 + counter;
-      }
-      counter = counter * 2;
-    }
-    firstLocation = x1;
-    secondLocation = x2;
-  }
-
-  public int getTofDistance () {
-    byte[] tofDistance = receiveMessage();
-    String dist = ((Byte) tofDistance[0]).toString();
-    int counter = 1;
-    int distance = 0;
-    for (int i = dist.length() - 1; i >= 0; i--) {//converts binary to base 10 
-      if (dist.charAt(i) == '1') {
-        distance = distance + counter;
-      }
-      counter = counter * 2;
-    }
-    System.out.println(distance);
-    return distance;
-    }
-  
-
 
   @Override
   public void initDefaultCommand() {

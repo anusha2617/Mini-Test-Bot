@@ -14,7 +14,9 @@ public class RobotMap {
 
     public static int pixyAddress = 8;
     public static int tofAddress = 18;
+    public static int lightsAddress = 7;
     public static int linearActuator = 3;
+    
 
     public enum SubsystemIndex
     {
