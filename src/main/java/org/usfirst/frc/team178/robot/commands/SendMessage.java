@@ -9,15 +9,16 @@ package org.usfirst.frc.team178.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team178.robot.OI;
+import org.usfirst.frc.team178.robot.subsystems.Arduino;
 import org.usfirst.frc.team178.robot.Robot;
 import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
-import org.usfirst.frc.team178.robot.subsystems.Arduino;
 
 public class SendMessage extends Command {
 
   OI oi;
-  Arduino arduino;
+  public Arduino arduino;
   String t; 
+  public boolean sent; 
 
   public SendMessage(String t) {
   this.t = t;
@@ -27,7 +28,7 @@ public class SendMessage extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    arduino = Robot.pixyArduino;
+    arduino = Robot.arduino;
   }
 
 
@@ -35,7 +36,7 @@ public class SendMessage extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    arduino.sendMessage(SubsystemIndex.ALL, t);
+    sent = arduino.sendMessage(t);
   }
 
 
@@ -43,7 +44,7 @@ public class SendMessage extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return sent;
   }
 
 

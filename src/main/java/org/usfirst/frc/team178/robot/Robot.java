@@ -27,9 +27,11 @@ public class Robot extends /*IterativeRobot*/ TimedRobot {
 	//Autonomous autonomousVroom;
 	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.left, RobotMap.right);
     public static OI oi;
-    public static Pixy pixyArduino;
-    public static TimeOfFlight tofArduino1;
-    public static TimeOfFlight tofArduino2;
+    public static Arduino arduino;
+    public static Pixy pixy1;
+    public static Pixy pixy2;
+    public static TimeOfFlight tofL;
+    public static TimeOfFlight tofR;
     public static LinearActuator linearactuator;
 
     Command autonomousCommand;
@@ -40,9 +42,11 @@ public class Robot extends /*IterativeRobot*/ TimedRobot {
      */
     public void robotInit() {
         oi = new OI();
-        pixyArduino = new Pixy();
-        tofArduino1 = new TimeOfFlight(1);
-        tofArduino2 = new TimeOfFlight(2);
+        arduino = new Arduino(RobotMap.lightsAddress);
+        pixy1 = new Pixy(RobotMap.pixy1Address);
+        pixy2 = new Pixy(RobotMap.pixy2Address);
+        tofL = new TimeOfFlight(RobotMap.tofAddressL);
+        tofR = new TimeOfFlight(RobotMap.tofAddressR);
         linearactuator = new LinearActuator();
     //    chooser = new SendableChooser();
     //    chooser.addDefault("Default Auto", new ExampleCommand());

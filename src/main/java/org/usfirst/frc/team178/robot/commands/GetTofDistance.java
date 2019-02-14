@@ -7,47 +7,65 @@
 
 package org.usfirst.frc.team178.robot.commands;
 
-import org.usfirst.frc.team178.robot.OI;
 import org.usfirst.frc.team178.robot.Robot;
+import org.usfirst.frc.team178.robot.RobotMap;
 import org.usfirst.frc.team178.robot.subsystems.Arduino;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class GetTofDistance extends Command {
-  Arduino arduino;
-  OI oi;
-  public GetTofDistance() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+/**
+ * Add your docs here.
+ */
+public class GetTofDistance extends Arduino {
+  // Put methods for controlling this subsystem
+  // here. Call these from Commands.
+  int address;
+
+  public GetTofDistance(int address)//use robotmap values
+  {
+    super(address);
+    this.address = address;
   }
 
-  // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
-    arduino = Robot.tofArduino;
-    oi = Robot.oi;
+  public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
   }
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-    arduino.getTofDistance();
-  }
+  public static int getTofDistance () 
+  {//need to decide if we gonna put calculations on here or arduino
+    byte[] tofDistance = Robot.tofL.receiveMessage(RobotMap.tofAddressL);//gets first tof value
+    String dist = ((Byte) tofDistance[0]).toString();
+    int counter = 1;
+    int distance = 0;
+    for (int i = dist.length() - 1; i >= 0; i--) {//converts binary to base 10 
+      if (dist.charAt(i) == '1') {
+        distance = distance + counter;
+      }
+      counter = counter * 2;
+    }
+    System.out.println(distance);
+    return distance;
+    }
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
+  public static boolean checkTofAlign()//need to see what the strings are in binary or could just change to ints 
+  {
     return false;
   }
 
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
+@Override
+  public byte[] receiveMessage(int address)
+  {
+    byte[] dataFromArduino = new byte[2];
+    received = arduino.read(this.address, 2, dataFromArduino);
+    for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
+      String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
+      System.out.print(s1 + ", ");
+      } 
+      System.out.println();
+      return dataFromArduino;
   }
 }

@@ -10,6 +10,7 @@ package org.usfirst.frc.team178.robot;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
+import org.usfirst.frc.team178.robot.commands.AlignHatchPanel;
 import org.usfirst.frc.team178.robot.commands.GetActuator;
 import org.usfirst.frc.team178.robot.commands.MoveActuator;
 import org.usfirst.frc.team178.robot.commands.Onwards;
@@ -70,7 +71,7 @@ public class OI {
     
     public OI()
     {     
-        lBumper.whileHeld(new SendMessage("c"));
+        lBumper.whileHeld(new AlignHatchPanel());
         rBumper.whileHeld(new SendMessage("h"));
         buttonA.whileHeld(new SendMessage("a"));
         buttonB.whileHeld(new SendMessage("b"));

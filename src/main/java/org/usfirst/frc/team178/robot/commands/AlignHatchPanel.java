@@ -7,15 +7,16 @@
 
 package org.usfirst.frc.team178.robot.commands;
 
+import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team178.robot.OI;
 import org.usfirst.frc.team178.robot.Robot;
 import org.usfirst.frc.team178.robot.subsystems.Arduino;
 import org.usfirst.frc.team178.robot.subsystems.LinearActuator;
-
-import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team178.robot.subsystems.Pixy;
 
 public class AlignHatchPanel extends Command {
-  Arduino pixyArduino;
+  Pixy pixy1;
+  Pixy pixy2;
   OI oi;
   LinearActuator linearactuator;
 
@@ -28,21 +29,23 @@ public class AlignHatchPanel extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    pixyArduino = Robot.pixyArduino;
+    pixy1 = Robot.pixy1;
+    pixy2 = Robot.pixy2;
     linearactuator = Robot.linearactuator;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double desiredavg = 159;//has middle line, then compares average of two x values of objects 
+    /*
+    double desiredavg = 159;
     pixyArduino.checkForPixyValues();
-    int firstLocation = pixyArduino.firstLocation;
-    int secondLocation = pixyArduino.secondLocation;
+    int firstLocation = pixyArduino.firstLoc;
+    int secondLocation = pixyArduino.secondLoc;
     double x1 = (double) firstLocation;
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2;
-    while(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){//margin of error for pixy values, need to test + adjust 
+    while(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){
       double diff = desiredavg-avg;
       if (diff>desiredavg){
         linearactuator.moveActuator(false);
@@ -50,12 +53,21 @@ public class AlignHatchPanel extends Command {
         linearactuator.moveActuator(true);
       }
     }
+    */
+    //moved to pixy subsystem
+  
+    while (!Pixy.checkPixyAlign())
+    {
+      linearactuator.moveActuator(true);//true for moving actuator, false for not
+    }
+    linearactuator.moveActuator(false);
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Pixy.checkPixyAlign();
   }
 
   // Called once after isFinished returns true

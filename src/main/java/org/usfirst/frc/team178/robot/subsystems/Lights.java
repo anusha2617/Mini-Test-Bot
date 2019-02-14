@@ -27,7 +27,7 @@ public class Lights extends Arduino {
 
   public Lights()
   {
-    super(I2C.Port.kOnboard, RobotMap.lightsAddress);
+    super(RobotMap.lightsAddress);
     ds = DriverStation.getInstance();
     
   }

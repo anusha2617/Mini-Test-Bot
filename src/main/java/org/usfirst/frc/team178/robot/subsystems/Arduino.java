@@ -22,23 +22,29 @@ import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
  */
 public class Arduino extends Subsystem {
   protected I2C arduino;
+  public boolean received;
+  boolean sent;
 
-  public Arduino(Port port , int address) {
-    arduino = new I2C(port, address); // check these values
+  public Arduino(int address) {
+    arduino = new I2C(I2C.Port.kOnboard, address); // check these values
   }
 
-  public void sendMessage(SubsystemIndex subsystem, String pattern) {
+  public boolean sendMessage(String pattern) {
     //String message = subsystem.ordinal() + pattern;
+    boolean sent = false;
     String message = pattern;
     message = message.toLowerCase();
     System.out.println(message);
-    arduino.writeBulk(message.getBytes());
+    sent = !arduino.writeBulk(message.getBytes());//because true if aborted, false if worked
     System.out.println(arduino.addressOnly());
+
+    return sent;
   }
 
-  public byte[] receiveMessage()
+  public byte[] receiveMessage(int address)//for which i2c address to read from 
   {
     byte[] dataFromArduino = new byte[2];//change based on type of data 
+    received = !arduino.read(address, 2, dataFromArduino);//because true if aborted, false if worked
     for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
     String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     System.out.print(s1 + ", ");
@@ -46,6 +52,16 @@ public class Arduino extends Subsystem {
     System.out.println();
 
     return dataFromArduino;
+  }
+
+  public boolean checkIfReceived()
+  {
+    return received;
+  }
+
+  public boolean checkIfSent()
+  {
+    return sent;
   }
 
   @Override

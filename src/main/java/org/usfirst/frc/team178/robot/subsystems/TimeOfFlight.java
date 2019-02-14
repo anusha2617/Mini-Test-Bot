@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team178.robot.subsystems;
 
+import org.usfirst.frc.team178.robot.Robot;
 import org.usfirst.frc.team178.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.I2C;
@@ -20,9 +21,9 @@ public class TimeOfFlight extends Arduino {
   // here. Call these from Commands.
   int address;
 
-  public TimeOfFlight(int address)
+  public TimeOfFlight(int address)//use robotmap values
   {
-    super(I2C.Port.kOnboard, address);
+    super(address);
     this.address = address;
   }
 
@@ -31,8 +32,10 @@ public class TimeOfFlight extends Arduino {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-  public int getTofDistance () {
-    byte[] tofDistance = receiveMessage();
+
+  public static int getTofDistance () 
+  {//need to decide if we gonna put calculations on here or arduino
+    byte[] tofDistance = Robot.tofL.receiveMessage(RobotMap.tofAddressL);//gets first tof value
     String dist = ((Byte) tofDistance[0]).toString();
     int counter = 1;
     int distance = 0;
@@ -46,12 +49,17 @@ public class TimeOfFlight extends Arduino {
     return distance;
     }
 
+  public static boolean checkTofAlign()//need to see what the strings are in binary or could just change to ints 
+  {
+    return false;
+  }
+
 
 @Override
-  public byte[] receiveMessage()
+  public byte[] receiveMessage(int address)
   {
     byte[] dataFromArduino = new byte[2];
-    arduino.read(this.address, 1, dataFromArduino);
+    received = arduino.read(this.address, 2, dataFromArduino);
     for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
       String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
       System.out.print(s1 + ", ");

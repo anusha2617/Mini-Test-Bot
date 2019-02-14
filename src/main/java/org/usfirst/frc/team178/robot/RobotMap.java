@@ -12,9 +12,10 @@ public class RobotMap {
     public static int left = 1;
     public static int right = 0;
 
-    public static int pixyAddress = 8;
-    public static int tofAddress1 = 18;
-    public static int tofAddress2 = 19;
+    public static int pixy1Address = 8;
+    public static int pixy2Address = 9;
+    public static int tofAddressL = 18;
+    public static int tofAddressR = 19;
     public static int lightsAddress = 7;
     public static int linearActuator = 3;
     

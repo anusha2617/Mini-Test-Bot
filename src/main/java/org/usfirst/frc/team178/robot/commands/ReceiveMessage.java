@@ -10,28 +10,30 @@ package org.usfirst.frc.team178.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team178.robot.OI;
 import org.usfirst.frc.team178.robot.Robot;
+import org.usfirst.frc.team178.robot.RobotMap;
 import org.usfirst.frc.team178.robot.subsystems.Arduino;
 
 public class ReceiveMessage extends Command {
   
   OI oi;
   Arduino arduino;
+  int address;
   
-  public ReceiveMessage() {
-
+  public ReceiveMessage(int address) {
+      this.address = address;
     }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    arduino = Robot.pixyArduino;
+    arduino = Robot.arduino;
     oi = Robot.oi;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    arduino.receiveMessage();
+    arduino.receiveMessage(RobotMap.lightsAddress);
   }
 
   // Make this return true when this Command no longer needs to run execute()
