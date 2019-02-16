@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Add your docs here.
  */
+//When value is 0, Linear Actuator is all the way left
 public class LinearActuator extends Subsystem {
   public PWM actuator;
 

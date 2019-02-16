@@ -50,14 +50,11 @@ public class AlignHatchPanel extends Command {
     double x1 = (double) firstLocation;
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2;
-
-    while(avg > (desiredavg  + 2) || avg < (desiredavg - 2)){
+    if(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){
       double diff = desiredavg-avg;
-      if (diff>desiredavg){
-        new MoveActuator(0,false); //change to new parameters
-      } else {
-        new MoveActuator(1, true);
-      }
+      double currentPosition = linearactuator.getPosition();
+      currentPosition+=diff;
+      linearactuator.setPosition(currentPosition);
     }
 
   }
