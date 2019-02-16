@@ -50,7 +50,10 @@ public class Pixy extends Arduino {
 
   public static void updateTargetValues() {
     byte[] coordinatesFromPixy = Robot.pixy1.receiveMessage(RobotMap.pixy1Address);//gets first x value from pixy
-    String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
+    int x1 = (int) coordinatesFromPixy[0];
+    //break
+    int x2 = (int) coordinatesFromPixy[0];
+  /*  String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
     System.out.println(x1Binary);
     int counter = 1;
     int x1 = 0;
@@ -72,7 +75,7 @@ public class Pixy extends Arduino {
         x2 = x2 + counter;
       }
       counter = counter * 2;
-    }
+    } */
     lLoc = x1;
     rLoc = x2;
     
