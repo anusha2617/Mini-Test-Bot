@@ -43,8 +43,8 @@ public class Pixy extends Arduino {
   @Override
   public byte[] receiveMessage(int address)
   {
-    byte[] dataFromArduino = new byte[2];
-    received = !arduino.read(address, 2, dataFromArduino);
+    byte[] dataFromArduino = new byte[4];
+    received = !arduino.read(address, 4, dataFromArduino);
     for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
       //String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     //  System.out.print(s1 + ", ");
@@ -65,11 +65,10 @@ public class Pixy extends Arduino {
       int x1 = bytebuffer1.getInt(); //converts base 2 value to base 10
     //break
    // int x2 = (int) coordinatesFromPixy[0];
-    coordinatesFromPixy = Robot.pixy2.receiveMessage(RobotMap.pixy2Address);
     ByteBuffer bytebuffer2 = ByteBuffer.allocateDirect(4); //allocating 4 bytes for an integer in this ByteBuffer object
      bytebuffer2.order(ByteOrder.LITTLE_ENDIAN); //makes it so that it goes from least significant bit to most significant bit
-     bytebuffer2.put(coordinatesFromPixy[1]);
-     bytebuffer2.put(coordinatesFromPixy[0]);
+     bytebuffer2.put(coordinatesFromPixy[3]);
+     bytebuffer2.put(coordinatesFromPixy[2]);
      bytebuffer2.put((byte) 0x00);
      bytebuffer2.put((byte) 0x00);
      bytebuffer2.flip(); //flips order of the bytes we put in the bytebuffer and stages it to convert to base 10
@@ -123,5 +122,4 @@ public class Pixy extends Arduino {
     System.out.println("Right: " + rLoc);
     return rLoc;
   }
-
 }

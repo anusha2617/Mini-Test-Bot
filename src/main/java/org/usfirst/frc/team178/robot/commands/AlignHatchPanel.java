@@ -39,7 +39,7 @@ public class AlignHatchPanel extends Command {
   @Override
   protected void execute() {
     System.out.println("execute");
-    double desiredavg = 159;//checks if the pixy is inbetween the two pieces of tape
+    double desiredavg = 157;//checks if the pixy is inbetween the two pieces of tape
     Pixy.updateTargetValues(); //refresh pixy values
   
 
@@ -51,7 +51,7 @@ public class AlignHatchPanel extends Command {
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2;
 
-    while(avg > (desiredavg  + 300) || avg < (desiredavg - 300)){
+    while(avg > (desiredavg  + 2) || avg < (desiredavg - 2)){
       double diff = desiredavg-avg;
       if (diff>desiredavg){
         new MoveActuator(0,false); //change to new parameters
