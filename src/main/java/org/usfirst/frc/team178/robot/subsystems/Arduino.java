@@ -7,7 +7,9 @@
 
 package org.usfirst.frc.team178.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -22,11 +24,13 @@ import org.usfirst.frc.team178.robot.RobotMap.SubsystemIndex;
  */
 public class Arduino extends Subsystem {
   protected I2C arduino;
+  DriverStation ds;
   public boolean received;
   boolean sent;
 
-  public Arduino(int address) {
-    arduino = new I2C(I2C.Port.kOnboard, address); // check these values
+  public Arduino(Port port , int address) {
+    arduino = new I2C(port, address); // check these values
+    ds = DriverStation.getInstance();
   }
 
   public boolean sendMessage(String pattern) {
@@ -34,9 +38,9 @@ public class Arduino extends Subsystem {
     boolean sent = false;
     String message = pattern;
     message = message.toLowerCase();
-    System.out.println(message);
+    //System.out.println(message);
     sent = !arduino.writeBulk(message.getBytes());//because true if aborted, false if worked
-    System.out.println(arduino.addressOnly());
+    //System.out.println(arduino.addressOnly());
 
     return sent;
   }
@@ -54,6 +58,8 @@ public class Arduino extends Subsystem {
     return dataFromArduino;
   }
 
+
+  //checkers
   public boolean checkIfReceived()
   {
     return received;
@@ -62,6 +68,34 @@ public class Arduino extends Subsystem {
   public boolean checkIfSent()
   {
     return sent;
+  }
+
+  //lights methods, move these to oi
+  public boolean setAllianceColor()
+  {
+    if (ds.getAlliance() == Alliance.Blue)
+    {
+      return sendMessage("b");
+    }
+    else 
+    {
+      return sendMessage("r");
+    }
+  }
+
+  public boolean lightsHatchPanel()
+  {
+    return sendMessage("h");
+  }
+
+  public boolean lightsCargoPanel()
+  {
+    return sendMessage("c");
+  }
+
+  public boolean lightsOff()
+  {
+    return sendMessage("o");
   }
 
   @Override

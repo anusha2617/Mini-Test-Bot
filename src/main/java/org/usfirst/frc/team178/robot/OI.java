@@ -73,13 +73,15 @@ public class OI {
     {     
         lBumper.whileHeld(new AlignHatchPanel());
         rBumper.whileHeld(new SendMessage("h"));
-        buttonA.whileHeld(new SendMessage("a"));
-        buttonB.whileHeld(new SendMessage("b"));
+        //buttonA.whileHeld(new SendMessage("a"));
+        //buttonB.whileHeld(new SendMessage("b"));
         backButton.whileHeld(new SendMessage("f"));
         startButton.whileHeld(new SendMessage("s"));
+
         //buttonB.whileHeld(new ReceiveMessage());
-        buttonX.whileHeld(new MoveActuator(true));
-        buttonY.whileHeld(new MoveActuator(false));
+        buttonX.whileHeld(new MoveActuator(1,true));
+        buttonY.whileHeld(new MoveActuator(0,false));
+        buttonA.whenPressed(new AlignHatchPanel());
         //buttonY.whenPressed(new GetActuator());
        // buttonY.whenPressed(new SetActuator(0));        
     }

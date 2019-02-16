@@ -24,7 +24,7 @@ public class GetTofDistance extends Arduino {
 
   public GetTofDistance(int address)//use robotmap values
   {
-    super(address);
+    super(I2C.Port.kOnboard, address);
     this.address = address;
   }
 

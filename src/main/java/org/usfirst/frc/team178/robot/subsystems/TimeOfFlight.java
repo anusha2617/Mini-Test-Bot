@@ -23,7 +23,7 @@ public class TimeOfFlight extends Arduino {
 
   public TimeOfFlight(int address)//use robotmap values
   {
-    super(address);
+    super(I2C.Port.kOnboard, address);
     this.address = address;
   }
 
@@ -45,7 +45,7 @@ public class TimeOfFlight extends Arduino {
       }
       counter = counter * 2;
     }
-    System.out.println(distance);
+    System.out.println("Distance " + distance);
     return distance;
     }
 

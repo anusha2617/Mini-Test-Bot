@@ -7,39 +7,60 @@
 
 package org.usfirst.frc.team178.robot.commands;
 
-import org.usfirst.frc.team178.robot.OI;
 import org.usfirst.frc.team178.robot.Robot;
 import org.usfirst.frc.team178.robot.subsystems.LinearActuator;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.WaitUntilCommand;
 
 public class MoveActuator extends Command {
-  LinearActuator linearactuator;
-  OI oi;
-  boolean moveForward;
-  public MoveActuator(boolean fwd) {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    moveForward = fwd;
+
+    LinearActuator linearactuator;
+    private double currentPosition;
+    private boolean movingForward;
+    private double setPoint;
+
+  public MoveActuator(double setPoint, boolean forward) {
+   // requires(Robot.linearactuator);
+    this.setPoint = setPoint;
+    movingForward = forward;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     linearactuator = Robot.linearactuator;
-    oi = Robot.oi;
+    currentPosition = linearactuator.getPosition();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    linearactuator.moveActuator(moveForward);
+    if (movingForward) {
+      if (currentPosition < 1 || currentPosition >= 0) {
+        currentPosition+=0.004;
+        linearactuator.setPosition(currentPosition);
+      }
+    } else {
+      if (currentPosition <= 1 || currentPosition > 0) {
+        currentPosition-=0.004;
+        linearactuator.setPosition(currentPosition);
+      }
+    }
+    //System.out.println(linearactuator.getPosition());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if(Math.abs(linearactuator.getPosition() - this.setPoint) >= 0.004)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 
   // Called once after isFinished returns true

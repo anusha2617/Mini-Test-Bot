@@ -42,7 +42,7 @@ public class Robot extends /*IterativeRobot*/ TimedRobot {
      */
     public void robotInit() {
         oi = new OI();
-        arduino = new Arduino(RobotMap.lightsAddress);
+        arduino = new Arduino(I2C.Port.kOnboard, RobotMap.lightsAddress);
         pixy1 = new Pixy(RobotMap.pixy1Address);
         pixy2 = new Pixy(RobotMap.pixy2Address);
         tofL = new TimeOfFlight(RobotMap.tofAddressL);

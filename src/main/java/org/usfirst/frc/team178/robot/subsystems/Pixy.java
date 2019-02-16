@@ -19,14 +19,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Pixy extends Arduino {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public static int firstLoc;
-  public static int secondLoc;
+  public static int lLoc;
+  public static int rLoc;
 
   public Pixy(int address)//use robotmap values
   {
-    super(address);
-    firstLoc = 0;
-    secondLoc = 0;
+    super(I2C.Port.kOnboard, address);
+    lLoc = 0;
+    rLoc = 0;
   }
 
   @Override
@@ -38,19 +38,20 @@ public class Pixy extends Arduino {
   @Override
   public byte[] receiveMessage(int address)
   {
-    byte[] dataFromArduino = new byte[2];
-    received = arduino.read(address, 1, dataFromArduino);
+    byte[] dataFromArduino = new byte[1];
+    received = !arduino.read(address, 1, dataFromArduino);
     for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
       String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
-      System.out.print(s1 + ", ");
+    //  System.out.print(s1 + ", ");
       } 
-      System.out.println();
+    //  System.out.println(": data from arduino");
       return dataFromArduino;
   }
 
-  public static void checkForPixyValues () {
+  public static void updateTargetValues() {
     byte[] coordinatesFromPixy = Robot.pixy1.receiveMessage(RobotMap.pixy1Address);//gets first x value from pixy
     String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
+    System.out.println(x1Binary);
     int counter = 1;
     int x1 = 0;
     for (int i = x1Binary.length() - 1; i >= 0; i--) {//converts binary to base 10
@@ -72,37 +73,31 @@ public class Pixy extends Arduino {
       }
       counter = counter * 2;
     }
-    firstLoc = x1;
-    secondLoc = x2;
-  }
-
-  public static boolean checkPixyAlign()//true if aligned, false if not
-  {
-    double desiredavg = 159;
-    checkForPixyValues();
-    int firstLocation = firstLoc;
-    int secondLocation = secondLoc;
-    double x1 = (double) firstLocation;
-    double x2 = (double) secondLocation; 
-    double avg = (x1 + x2)/2;
-    if(avg > (desiredavg  + 50) || avg < (desiredavg - 50)){
-      double diff = desiredavg-avg;
-      if (diff>desiredavg){
-        return true;
-      }
+    lLoc = x1;
+    rLoc = x2;
+    
+    if (x1 > x2)//determines which one is on the left 
+    {
+      lLoc = x2;
+      rLoc = x1;
     }
-    return false;
+    else 
+    {
+      lLoc = x1;
+      rLoc = x2;
+    }
   }
 
-
-  public int getFirstLoc()
+  public static int getLeft()
   {
-    return firstLoc;
+    System.out.println("Left: " + lLoc);
+    return lLoc;
   }
 
-  public int getSecondLoc()
+  public static int getRight()
   {
-    return secondLoc;
+    System.out.println("Right: " + rLoc);
+    return rLoc;
   }
 
 }

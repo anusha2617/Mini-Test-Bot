@@ -9,7 +9,6 @@ package org.usfirst.frc.team178.robot.subsystems;
 
 import org.usfirst.frc.team178.robot.RobotMap;
 import org.usfirst.frc.team178.robot.commands.MoveActuator;
-import org.usfirst.frc.team178.robot.commands.SetActuator;
 import org.usfirst.frc.team178.robot.Robot;
 
 import edu.wpi.first.wpilibj.PWM;
@@ -26,28 +25,28 @@ public class LinearActuator extends Subsystem {
     actuator = new PWM(RobotMap.linearActuator);
   }
 
-  public void set (double val) {
+  public void setPosition(double val) {
     actuator.setPosition(val);
   }
 
-  public double get () {
+  public double getPosition() {
     return actuator.getPosition();
   }
 
-  public void moveActuator (boolean movingForward) {
-    double currentPosition = get();
+  public void moveActuator(boolean movingForward) {
+    double currentPosition = getPosition();
     if (movingForward) {
       if (currentPosition < 1 || currentPosition >= 0) {
         currentPosition+=0.004;
-        set(currentPosition);
+        setPosition(currentPosition);
       }
     } else {
       if (currentPosition <= 1 || currentPosition > 0) {
         currentPosition-=0.004;
-        set(currentPosition);
+        setPosition(currentPosition);
       }
     }
-    System.out.println(get());
+    System.out.println("Actuator " + getPosition());
   }
 
 
